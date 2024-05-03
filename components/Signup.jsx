@@ -14,7 +14,11 @@ import {
 const formSchema = z.object({
     email: z.string().min(1, { message: "Can't be empty" }).email("Invalid email"),
     password: z.string().min(8, {message: "Invalid password"}).max(50),
-})
+    confirmPassword: z.string().min(8, {message: "Invalid password"}).max(50)
+}).refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["password"], // path of error
+});
 
 export default function Login(){
     const form = useForm({
@@ -27,18 +31,24 @@ export default function Login(){
 
     return (
         <div className="bg-white p-8 rounded-xl max-w-[90vw]">
-            <h1 className="self-start font-bold text-[32px]">Login</h1>
-            <p className="self-start text-dark-gray">Add your details below to get back into the app</p>
+            <h1 className="self-start font-bold text-[32px]">Create account</h1>
+            <p className="self-start text-dark-gray">Let’s get you started sharing your links!</p>
             <Form {...form}>
                 <form  onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10">
                     <Input type={'email'} id={'email'} label={'Email address'} placeholder={'e.g. alex@email.com'} control={form.control}>
                         <Image src={'/images/icon-email.svg'} width={13} height={10} />
                     </Input>
-                    <Input type={'password'} id={'password'} label={'Password'} placeholder={'Enter your password'}>
+                    <Input type={'password'} id={'password'} label={'Create password'} placeholder={'At least 8 characters'}>
                         <Image src={'/images/icon-password.svg'} width={13} height={10} />
                     </Input>
-                    <Button>Login</Button>
-                    <p className="text-dark-gray text-xs text-center xl:text-md">Don’t have an account? <a className="text-primary cursor-pointer" href="/signup">Create account</a></p>
+                    <Input type={'password'} id={'confirmPassword'} label={'Confirm password'} placeholder={'At least 8 characters'}>
+                        <Image src={'/images/icon-password.svg'} width={13} height={10} />
+                    </Input>
+
+                    <p className="text-xs text-dark-gray">Password must contain at least 8 characters</p>
+
+                    <Button>Create new account</Button>
+                    <p className="text-dark-gray text-xs text-center xl:text-md">Already have an account? <a className="text-primary cursor-pointer" href="/signup">Login</a></p>
                 </form>
             </Form>
         </div>
