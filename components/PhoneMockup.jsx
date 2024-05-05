@@ -1,4 +1,10 @@
+import { useProfile } from "@/hooks/useProfile"
 import Image from "next/image"
+import { useEffect,useState } from "react"
+
+const res = await fetch("http://localhost:3000/platforms.json")
+const platforms = await res.json()
+
 function Root({children}){
     return (
         <div className="relative h-[630px] w-[307px] bg-center bg-no-repeat" style={{backgroundImage: "url(/images/illustration-phone-mockup.svg"}}>
@@ -25,19 +31,45 @@ function Email({children}){
     )
 }
 
-function Links({children}){
+function Links(){
+    const {links} = useProfile()
+
+
     return (
         <div className="absolute top-[277px] left-1/2 -translate-x-1/2  w-[237px]  flex flex-col items-center gap-y-5">
-            {children}
+            {links && links.map((link, index) => (
+                <Link link={link} key={`mockupLink-${index}`}/>
+            ))}
         </div>
     )
 }
 
-function Link({ children, href, className }) {
+function Link({link}) {
+    "use state"
+    const [platform, setPlatform] = useState()
+    useEffect(() => {
+        platforms.map((platform) => {
+            if(platform.value === link.platform){
+                setPlatform(platform)
+            }
+        })
+    }, [link])
+
+    if(!platform)
+        return
+
     return (
-        <a target="_blank" href={href} rel="noopener noreferrer" passHref className={`w-full h-11 rounded-lg grid grid-cols-[2em_1fr_2em] items-center align-center text-white ${className}`}>
-            {children}
-            <Image src="/images/icon-arrow-right.svg" width={11} height={11} className="place-self-center"/>
+        <a target="_blank" href={link.url} rel="noopener noreferrer" passHref className={`w-full h-11 rounded-lg grid grid-cols-[2em_1fr_2em] items-center align-center ps-3 shadow-[0px_2px_6px_4px_rgba(0,0,0,0.08)]`} style={{
+            backgroundColor: platform.color,
+            color: platform.textColor
+        }}>
+            <Image src={platform.icon} width={16} height={16} alt={`${link.platform}'s Icon`}  className="filter" style={{
+                filter: platform.textColor === '#ffffff' ? "brightness(0) invert(1)" : "saturate(1) brightness(1) invert(1)",
+            }}/>
+            {platform.name}
+            <Image src="/images/icon-arrow-right.svg" width={16} alt="Arrow Right Icon" height={11} className="place-self-center" style={{
+                filter: platform.textColor === '#ffffff' ? "brightness(0) invert(1)" : "saturate(1) brightness(1) invert(1)",
+            }}/>
         </a>
     );
 }

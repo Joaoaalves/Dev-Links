@@ -1,0 +1,93 @@
+[
+    {
+        "name": "Github",
+        "value": "github",
+        "color" : "#000000",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-github.svg"
+    },
+    {
+        "name": "Frontend Mentor",
+        "value": "frotend-mentor",
+        "color" : "#ffffff",
+        "textColor" : "#000000",
+        "icon" : "/images/icon-frontend-mentor.svg"
+    },
+    {
+        "name": "Twitter",
+        "value": "twitter",
+        "color" : "#43B7E9",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-twitter.svg"
+    },
+    {
+        "name": "Linkedin",
+        "value": "linkedin",
+        "color" : "#2D68FF",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-linkedin.svg"
+    },
+    {
+        "name": "Youtube",
+        "value": "youtube",
+        "color" : "#EE3939",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-youtube.svg"
+    },
+    {
+        "name": "Facebook",
+        "value": "facebook",
+        "color" : "#2442AC",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-facebook.svg"
+    },
+    {
+        "name": "Twitch",
+        "value": "twitch",
+        "color" : "#EE3FC8",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-twitch.svg"
+    },
+    {
+        "name": "Dev.to",
+        "value": "dev-to",
+        "color" : "#333333",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-devto.svg"
+    },
+    {
+        "name": "Codewars",
+        "value": "codewars",
+        "color" : "#8A1A50",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-codewars.svg"
+    },
+    {
+        "name": "freeCodeCamp",
+        "value": "free-code-camp",
+        "color" : "#8A1A50",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-freecodecamp.svg"
+    },
+    {
+        "name": "GitLab",
+        "value": "gitlab",
+        "color" : "#EB4925",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-gitlab.svg"
+    },
+    {
+        "name": "Hashnode",
+        "value": "hashnode",
+        "color" : "#0330D1",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-hashnode.svg"
+    },
+    {
+        "name": "Stack Overflow",
+        "value": "stack-overflow",
+        "color" : "#EC7100",
+        "textColor" : "#ffffff",
+        "icon" : "/images/icon-stack-overflow.svg"
+    }
+]
