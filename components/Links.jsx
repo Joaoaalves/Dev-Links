@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
     Collapsible,
     CollapsibleContent,
@@ -17,9 +17,7 @@ import {
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
     
 import { useProfile } from "@/hooks/useProfile"
-
-const res = await fetch("http://localhost:3000/platforms.json")
-const platforms = await res.json()
+import { usePlatforms } from "@/hooks/usePlatforms"
 
 export default function Links(){
     const {links, addLink, swapLinksPosition } = useProfile()
@@ -63,7 +61,7 @@ export default function Links(){
                         </div>
                 </DragDropContext>
                 {
-                    links && links.lenght > 0 && <button className="p-2 bg-primary text-white rounded-lg ms-auto">Save</button>
+                    links && <button className="p-2 w-24 bg-primary text-white rounded-lg ms-auto me-4 hover:bg-secondary hover:scale-105 transition-all duration-150">Save</button>
                 }
             </div>
     )
@@ -77,7 +75,7 @@ function NewLinkButton({onClick}){
 
 function Link({link, index}){
     const [isOpen, setIsOpen] = useState(true)
-
+    const {getPlatformName} = usePlatforms()
 
     const {removeLink} = useProfile()
 
@@ -91,7 +89,7 @@ function Link({link, index}){
                 <CollapsibleTrigger asChild>
                     <div className="flex gap-x-2 items-center cursor-pointer">
                         <Image src="/images/icon-drag-and-drop.svg" width={12} height={6} />
-                        <h4 className="font-bold text-borders">{link.platform ? link.platform : `Link #${index}`}</h4>
+                        <h4 className="font-bold text-borders">{link.platform ? getPlatformName(link.platform) : `Link #${index}`}</h4>
                     </div>
                 </CollapsibleTrigger>
                 <button onClick={() => removeLink(link.id)} className="text-borders hover:text-red transition-all duration-300">
@@ -107,52 +105,70 @@ function Link({link, index}){
     )
 }
 
-function LinkSelect({link}){
-    const {handleLinkChange} = useProfile()
+function LinkSelect({ link }) {
+    const { handleLinkChange } = useProfile();
+    const { platforms } = usePlatforms();
 
     const onValueChange = (value) => {
-        handleLinkChange(
-            link.id, 
-            "platform",
-            value
-        )
-    }
-
+      handleLinkChange(
+        link.id,
+        'platform',
+        value
+      );
+    };
+  
     return (
-        <div className="flex flex-col items-start gap-y-2 w-full">
-            <label className="text-sm font-semibold text-dark-gray">Platform</label>
-            <Select onValueChange={(value) => onValueChange(value)} id="" className="w-full" value={link.platform}>
-                <SelectTrigger className="w-full h-14 text-[1em] text-dark-gray rounded-lg !border-light-gray">
-                    <SelectValue placeholder="Platform" className=""/>
-                </SelectTrigger>
-                <SelectContent >
-                {platforms && platforms.map((platform, index) => (
-                    <SelectItem value={platform.value} key={`platform-${index}`} className="cursor-pointer hover:bg-[#d3d3d3] !border-light-gray" >
+      <div className="flex flex-col items-start gap-y-2 w-full">
+        <label className="text-sm font-semibold text-dark-gray">Platform</label>
+        <Select onValueChange={onValueChange} id="" className="w-full" value={link.platform}>
+          <SelectTrigger className="w-full h-14 text-[1em] text-dark-gray rounded-lg !border-light-gray">
+            <SelectValue placeholder="Platform" className="" />
+          </SelectTrigger>
+          <SelectContent>
+            {platforms && Object.keys(platforms).map((key) => {
+                const { name, color, icon } = platforms[key];
+                return (
+                    <SelectItem value={key} key={`platform-${key}`} className="cursor-pointer hover:bg-[#d3d3d3] !border-light-gray">
                         <div className="flex items-center gap-x-4  w-full p-2">
-                            <Image src={platform.icon} alt={`Icon`} width={16} height={16} />
-                            {platform.name}
+                        <Image src={icon} alt={`Icon`} width={16} height={16} style={{
+                            filter: "saturate(1) brightness(1) invert(1)"
+                        }}/>
+                        {name}
                         </div>
-                    </SelectItem> 
-                ))}
-                </SelectContent>
+                    </SelectItem>
+            )})}
+          </SelectContent>
+        </Select>
+      </div>
+    );
+  }
 
-            </Select>
-        </div>
-    )
-}
-
-function LinkInput({link}){
+  function LinkInput({link}){
     const {handleLinkChange} = useProfile()
+    const [validLink, setValidLink] = useState(false)
+
+    const {validateUrl} = usePlatforms()
 
     const onChange = (value) => {
         handleLinkChange(link.id, 'url', value)
     }
+
+    useEffect(() => {
+        if(link.platform && link.url)
+            setValidLink(validateUrl(link.platform, link.url))
+    }, [link])
+
     return (
-        <div className="w-full">
-            <label htmlFor="">Link</label>
-            <div className="flex items-center gap-x-4 w-full h-14 p-5 border-[1px] border-light-gray rounded-lg">
+        <div className="flex flex-col items-start gap-y-2 w-full">
+            <label className="text-sm font-semibold text-dark-gray">Link</label>
+            <div className="grid grid-cols-[2em_1fr] sm:grid-cols-[2em_1fr_10em] grid-rows-1 items-center place-items-center max-w-[90vw] border-[1px] rounded p-3 gap-x-2 w-full" style={{
+                borderColor: validLink ? "" : "red",
+            }}>
                 <Image src={"/images/icon-link.svg"} alt={"Icon"} width={16} height={16} />
                 <input onChange={(e) => onChange(e.target.value)} type="text" name="Link" id="" value={link.url} className="border-0 w-full ring-0 outline-none"/>
+                {!validLink && 
+                    <span className="hidden sm:block !text-red ms-auto me-3 text-[10px]">Invalid Link</span>
+                }
             </div>
         </div>
     )

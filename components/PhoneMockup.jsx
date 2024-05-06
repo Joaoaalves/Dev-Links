@@ -1,9 +1,7 @@
+import { usePlatforms } from "@/hooks/usePlatforms"
 import { useProfile } from "@/hooks/useProfile"
 import Image from "next/image"
-import { useEffect,useState } from "react"
-
-const res = await fetch("http://localhost:3000/platforms.json")
-const platforms = await res.json()
+import {useState, useEffect} from "react"
 
 function Root({children}){
     return (
@@ -46,13 +44,11 @@ function Links(){
 
 function Link({link}) {
     "use state"
+    const {platforms} = usePlatforms()
     const [platform, setPlatform] = useState()
+
     useEffect(() => {
-        platforms.map((platform) => {
-            if(platform.value === link.platform){
-                setPlatform(platform)
-            }
-        })
+        setPlatform(platforms[link.platform])
     }, [link])
 
     if(!platform)

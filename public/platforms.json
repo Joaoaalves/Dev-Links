@@ -1,93 +1,106 @@
-[
-    {
+{
+    "github": {
         "name": "Github",
-        "value": "github",
-        "color" : "#000000",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-github.svg"
+        "color": "#000000",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-github.svg",
+        "regex": "^https?:\\/\\/(www\\.)?github\\.com\\/.+$",
+        "base": "https://github.com/"
     },
-    {
+    "frontend-mentor": {
         "name": "Frontend Mentor",
-        "value": "frotend-mentor",
-        "color" : "#ffffff",
-        "textColor" : "#000000",
-        "icon" : "/images/icon-frontend-mentor.svg"
+        "color": "#ffffff",
+        "textColor": "#000000",
+        "icon": "/images/icon-frontend-mentor.svg",
+        "regex": "^https?:\\/\\/(www\\.)?frontendmentor\\.io\\/.+$",
+        "base": "https://frontendmentor.io/"
     },
-    {
+    "twitter": {
         "name": "Twitter",
-        "value": "twitter",
-        "color" : "#43B7E9",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-twitter.svg"
+        "color": "#43B7E9",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-twitter.svg",
+        "regex": "^https?:\\/\\/(www\\.)?twitter\\.com\\/.+$",
+        "base": "https://twitter.com/"
     },
-    {
+    "linkedin": {
         "name": "Linkedin",
-        "value": "linkedin",
-        "color" : "#2D68FF",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-linkedin.svg"
+        "color": "#2D68FF",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-linkedin.svg",
+        "regex": "^https?:\\/\\/(www\\.)?linkedin\\.com\\/.+$",
+        "base": "https://www.linkedin.com/"
     },
-    {
+    "youtube": {
         "name": "Youtube",
-        "value": "youtube",
-        "color" : "#EE3939",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-youtube.svg"
+        "color": "#EE3939",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-youtube.svg",
+        "regex": "^https?:\\/\\/(www\\.)?youtube\\.com\\/.+$",
+        "base": "https://www.youtube.com/"
     },
-    {
+    "facebook": {
         "name": "Facebook",
-        "value": "facebook",
-        "color" : "#2442AC",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-facebook.svg"
+        "color": "#2442AC",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-facebook.svg",
+        "regex": "^https?:\\/\\/(www\\.)?facebook\\.com\\/.+$",
+        "base": "https://www.facebook.com/"
     },
-    {
+    "twitch": {
         "name": "Twitch",
-        "value": "twitch",
-        "color" : "#EE3FC8",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-twitch.svg"
+        "color": "#EE3FC8",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-twitch.svg",
+        "regex": "^https?:\\/\\/(www\\.)?twitch\\.tv\\/.+$",
+        "base": "https://www.twitch.tv/"
     },
-    {
+    "dev-to": {
         "name": "Dev.to",
-        "value": "dev-to",
-        "color" : "#333333",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-devto.svg"
+        "color": "#333333",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-devto.svg",
+        "regex": "^https?:\\/\\/(www\\.)?dev\\.to\\/.+$",
+        "base": "https://dev.to/"
     },
-    {
+    "codewars": {
         "name": "Codewars",
-        "value": "codewars",
-        "color" : "#8A1A50",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-codewars.svg"
+        "color": "#8A1A50",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-codewars.svg",
+        "regex": "^https?:\\/\\/(www\\.)?codewars\\.com\\/.+$",
+        "base": "https://www.codewars.com/"
     },
-    {
+    "free-code-camp": {
         "name": "freeCodeCamp",
-        "value": "free-code-camp",
-        "color" : "#8A1A50",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-freecodecamp.svg"
+        "color": "#8A1A50",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-freecodecamp.svg",
+        "regex": "^https?:\\/\\/(www\\.)?freecodecamp\\.org\\/.+$",
+        "base": "https://www.freecodecamp.org/"
     },
-    {
+    "gitlab": {
         "name": "GitLab",
-        "value": "gitlab",
-        "color" : "#EB4925",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-gitlab.svg"
+        "color": "#EB4925",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-gitlab.svg",
+        "regex": "^https?:\\/\\/(www\\.)?gitlab\\.com\\/.+$",
+        "base": "https://gitlab.com/"
     },
-    {
+    "hashnode": {
         "name": "Hashnode",
-        "value": "hashnode",
-        "color" : "#0330D1",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-hashnode.svg"
+        "color": "#0330D1",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-hashnode.svg",
+        "regex": "^https?:\\/\\/(www\\.)?hashnode\\.com\\/.+$",
+        "base": "https://hashnode.com/"
     },
-    {
+    "stack-overflow": {
         "name": "Stack Overflow",
-        "value": "stack-overflow",
-        "color" : "#EC7100",
-        "textColor" : "#ffffff",
-        "icon" : "/images/icon-stack-overflow.svg"
+        "color": "#EC7100",
+        "textColor": "#ffffff",
+        "icon": "/images/icon-stack-overflow.svg",
+        "regex": "^https?:\\/\\/(www\\.)?stackoverflow\\.com\\/.+$",
+        "base": "https://stackoverflow.com/"
     }
-]
+}
