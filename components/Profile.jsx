@@ -132,7 +132,14 @@ function SaveButton(){
             if(res.error)
                 return alert(res.error)
             
-            toast("Your changes have been successfully saved!")
+            toast("Your changes have been successfully saved!", {
+                position: "bottom-center",
+                style: {
+                    backgroundColor: "#333333",
+                    color: 'white',
+                    textAlign: 'center',
+                },
+            })
         })
     }
 

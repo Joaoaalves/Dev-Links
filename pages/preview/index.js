@@ -17,7 +17,14 @@ export default function Home() {
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text)
           .then(() => {
-            toast("The link has been copied to your clipboard!")
+            toast("The link has been copied to your clipboard!", {
+                position: "bottom-center",
+                style: {
+                    backgroundColor: "#333333",
+                    color: 'white',
+                    textAlign: 'center',
+                },
+            })
           })}
 
   return (

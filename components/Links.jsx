@@ -44,7 +44,14 @@ export default function Links() {
           if(res.error)
             console.log(res.error)
           else
-            toast("Your changes have been successfully saved!")
+            toast("Your changes have been successfully saved!", {
+              position: "bottom-center",
+              style: {
+                backgroundColor: "#333333",
+                color: 'white',
+                textAlign: 'center',
+            },
+          })
         }
       )
     };
