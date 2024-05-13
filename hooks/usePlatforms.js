@@ -1,36 +1,38 @@
-import { Regex } from 'lucide-react';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Regex } from "lucide-react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const PlatformContext = createContext();
 
 export const PlatformProvider = ({ children }) => {
-    const [platforms, setPlatforms] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
 
-    useEffect(() => {
-        const fetchPlatforms = async () => {
-            const res = await fetch('/platforms.json')
-            const data = await res.json()
-            setPlatforms(data)
-        }
+  useEffect(() => {
+    const fetchPlatforms = async () => {
+      const res = await fetch("/api/platforms");
+      const data = await res.json();
+      setPlatforms(data.platforms);
+    };
 
-        fetchPlatforms()
-    }, [])
+    fetchPlatforms();
+  }, []);
 
-    const getPlatformName = (platform) => {
-        return platforms[platform].name
-    }
+  const validateUrl = (platformId, url) => {
+    const platform = getPlatform(platformId);
+    const regex = new RegExp(platform.regex);
+    return regex.test(url);
+  };
 
-    const validateUrl = (platform, url) => {
-        const regex = new RegExp(platforms[platform].regex)
-        console.log(platforms[platform].regex)
-        return regex.test(url)
-    }
+  const getPlatform = (platformId) => {
+    return platforms.find(platform => platform._id === platformId);
+  }
 
-    return (
-        <PlatformContext.Provider value={{ platforms, getPlatformName, validateUrl }}>
-            {children}
-        </PlatformContext.Provider>
-    );
+  return (
+    <PlatformContext.Provider
+      value={{ platforms, getPlatform, validateUrl }}
+    >
+      {children}
+    </PlatformContext.Provider>
+  );
 };
 
 export const usePlatforms = () => useContext(PlatformContext);

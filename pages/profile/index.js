@@ -2,14 +2,15 @@ import { Instrument_Sans } from "next/font/google";
 
 import PhoneMockup from "@/components/PhoneMockup";
 import NavBar from "@/components/NavBar";
-import Links from "@/components/Links";
 
 import { ProfileProvider } from "@/hooks/useProfile";
 import { PlatformProvider } from "@/hooks/usePlatforms";
 import { NextAuthProvider } from "@/contexts/AuthProvider";
+import Profile from "@/components/Profile";
+
+const font = Instrument_Sans({ subsets: ["latin"] });
 
 import { Toaster } from "@/components/ui/sonner"
-const font = Instrument_Sans({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -20,18 +21,18 @@ export default function Home() {
         <PlatformProvider>
           <ProfileProvider>
             <NavBar />
-            <div className="flex items-start justify-start w-full p-6 gap-x-6 max-h-[85vh]">
+            <div className="flex items-start justify-start w-screen p-6 gap-x-6 max-h-[85vh]">
               <div className="w-2/5 h-full flex justify-center">
                 <PhoneMockup.Root>
-                  <PhoneMockup.ProfileImage />
-                  <PhoneMockup.Name />
+                <PhoneMockup.ProfileImage />
                   <PhoneMockup.Email />
+                  <PhoneMockup.Name />
                   <PhoneMockup.Links />
                 </PhoneMockup.Root>
               </div>
 
               <div className="w-3/5 h-full flex flex-col items-center">
-                <Links />
+                <Profile />
               </div>
             </div>
           </ProfileProvider>
