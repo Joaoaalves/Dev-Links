@@ -31,6 +31,18 @@ export default function Links() {
 
   const handleSaveLinks = async () => {
     const saveLinks = async () => {
+      const emptyLinkExists = links.some(link => !link.platform || !link.url);
+
+      if(emptyLinkExists)
+        return toast("Please remove or complete all empty links before submitting.", {
+          position: "bottom-center",
+          style: {
+            backgroundColor: "#FF3939",
+            color: "white",
+            textAlign: "center",
+          },
+      });
+
       await fetch("/api/link", {
         method: "POST",
         headers: {
@@ -56,14 +68,14 @@ export default function Links() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-start bg-white rounded-xl p-10">
-      <h1 className="mb-2 text-[32px] font-bold">Customize your links</h1>
-      <p className="mb-10 text-borders">
+    <div className="w-full h-full flex flex-col items-start bg-white rounded-xl p-6 md:p-10">
+      <h1 className="mb-2 text-2xl md:text-[32px] font-bold">Customize your links</h1>
+      <p className="mb-10 text-borders text-[16px]">
         Add/edit/remove links below and then share all your profiles with the
         world!
       </p>
       <NewLinkButton onClick={addLink}>+ Add new link</NewLinkButton>
-      <ScrollArea className="w-full whitespace-nowrap rounded-md pe-4">
+      {links && links.length > 0 && <ScrollArea className="w-full whitespace-nowrap rounded-md pe-4">
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="w-full">
             <Droppable droppableId="droppable">
@@ -97,11 +109,12 @@ export default function Links() {
           </div>
         </DragDropContext>
         <ScrollBar orientation="vertical" />
-      </ScrollArea>
-      {links && (
+      </ScrollArea>}
+      {links.length === 0 && <GetStarted />}
+      {links.length > 0 && (
         <button
           onClick={handleSaveLinks}
-          className="p-2 w-36 bg-primary text-white rounded-lg ms-auto me-4 mt-6 hover:bg-secondary hover:scale-105 transition-all duration-150"
+          className="p-2 w-full md:w-36 bg-primary text-white rounded-lg ms-auto me-4 mt-auto hover:bg-secondary hover:scale-105 transition-all duration-150"
         >
           Save
         </button>
@@ -130,12 +143,12 @@ function Link({ link, index }) {
     <Collapsible
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="w-full space-y-2 cursor-grab active:cursor-grabbing p-[20px] bg-[#FAFAFA] my-6 rounded-lg"
+      className="w-full space-y-2 cursor-grab active:cursor-grabbing p-[20px] bg-background my-6 rounded-lg"
     >
       <div className="flex items-center justify-between space-x-4">
         <CollapsibleTrigger asChild>
           <div className="flex gap-x-2 items-center cursor-pointer">
-            <Image src="/images/icon-drag-and-drop.svg" width={12} height={6} />
+            <Image src="/images/icon-drag-and-drop.svg" width={12} height={6} alt="Drag and drop icon."/>
             <h4 className="font-bold text-borders">
               {link?.platform
                 ? getPlatform(link.platform).name
@@ -156,6 +169,16 @@ function Link({ link, index }) {
       </CollapsibleContent>
     </Collapsible>
   );
+}
+
+function GetStarted(){
+  return (
+    <div className="bg-background flex flex-col items-center justify-center w-full h-full px-8">
+      <Image src={'/images/illustration-empty.svg'} width={250} height={160} alt="Image of a hand touching a table screen."/>
+      <h1 className="text-[32px] font-bold text-center text-dark-gray">Let’s get you started</h1>
+      <p className="text-[16px] text-borders text-center max-w-96">Use the “Add new link” button to get started. Once you have more than one link, you can reorder and edit them. We’re here to help you share your profiles with everyone!</p>
+    </div>
+  )
 }
 
 function LinkSelect({ link }) {
@@ -189,7 +212,7 @@ function LinkSelect({ link }) {
                 <div className="flex items-center gap-x-4  w-full p-2">
                   <Image
                     src={platform.icon}
-                    alt={`Icon`}
+                    alt={`Icon of ${platform.name}`}
                     width={16}
                     height={16}
                     style={{
@@ -232,7 +255,7 @@ function LinkInput({ link }) {
       >
         <Image
           src={"/images/icon-link.svg"}
-          alt={"Icon"}
+          alt={"Icon of link"}
           width={16}
           height={16}
         />

@@ -16,7 +16,7 @@ async function GET(req, res) {
       return res.status(400).json({ message: "Invalid User ID." });
     }
 
-    const user = await User.findById(user_id);
+    const user = await User.findById(user_id).populate('links');
     
     if (user) {
       return res.status(200).json({ user });

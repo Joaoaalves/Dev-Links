@@ -9,6 +9,7 @@ export const PlatformProvider = ({ children }) => {
     const fetchPlatforms = async () => {
       const res = await fetch("/api/platforms");
       const data = await res.json();
+      console.log(data)
       setPlatforms(data.platforms);
     };
 

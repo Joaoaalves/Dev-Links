@@ -9,21 +9,31 @@ export default function NavBar() {
   };
 
   return (
-    <div className="p-12 h-20 flex items-center justify-between rounded-xl mx-6 mt-6 bg-white">
+    <div className="p-12 h-20 flex items-center justify-between rounded-xl md:mx-6 md:mt-6 bg-white">
       <Image
         alt="Devlinks Logo"
         width={185}
         height={40}
         src={"/images/logo-devlinks-large.svg"}
+        className="hidden md:block"
       />
-
+      
+      <Image
+        alt="Devlinks Logo"
+        width={36}
+        height={36}
+        src={"/images/logo-devlinks-small.svg"}
+        className="block md:hidden"
+      />
+      
       <Links />
 
       <button
         onClick={handlePreview}
-        className="bg-white text-primary border-2 border-primary rounded-lg p-2 hover:bg-primary hover:text-white transition-all duration-300"
+        className="bg-white text-primary border border-primary rounded-lg py-2 px-3 md:px-2 hover:bg-primary hover:text-white transition-all duration-300 group"
       >
-        Preview
+        <span className="hidden md:block">Preview</span>
+        <Image src={"/images/icon-preview-header.svg"} width={20} height={20} className="group-hover:filter group-hover:invert group-hover:brightness-0 transition-all duration-300 md:hidden" alt="Preview icon."/>
       </button>
     </div>
   );
@@ -46,9 +56,9 @@ function Links() {
       <ul className="flex items-center justify-between gap-x-4">
         <Link href={"/dashboard"} isActive={isDashBoardActive}>
           <Image
-            alt="Header Link Icon"
-            width={16}
-            height={16}
+            alt="Links dashboard icon."
+            width={24}
+            height={24}
             src={"/images/icon-links-header.svg"}
             style={{
               filter: isDashBoardActive
@@ -56,13 +66,13 @@ function Links() {
                 : "",
             }}
           />
-          Links
+          <span className="hidden md:block">Links</span>
         </Link>
         <Link href={"/profile"} isActive={isProfileActive}>
           <Image
-            alt="Header Link Icon"
-            width={16}
-            height={16}
+            alt="Profile link icon."
+            width={24}
+            height={24}
             src={"/images/icon-profile-details-header.svg"}
             style={{
               filter: isProfileActive
@@ -70,7 +80,7 @@ function Links() {
                 : "",
             }}
           />
-          Profile Details
+          <span className="hidden md:block">Profile Details</span>
         </Link>
       </ul>
     </nav>
@@ -81,7 +91,7 @@ function Link({ href, isActive, children }) {
   return (
     <a
       href={href}
-      className={`bg-white text-borders flex items-center justify-center gap-x-2 p-2 rounded`}
+      className={`bg-white text-borders flex items-center justify-center gap-x-2 px-5 py-2 md:px-2 rounded`}
       style={{
         backgroundColor: isActive ? "#EFEBFF" : "#fff",
         color: isActive ? "#633CFF" : "",

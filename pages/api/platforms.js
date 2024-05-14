@@ -1,13 +1,15 @@
 import { connectDB } from "@/lib/connectDB";
 import Platform from "@/models/Platform";
-import { getServerSession } from "next-auth";
-import authOptions from "./auth/[...nextauth]";
 
 export default async function handler(req, res) {
-  const session = await getServerSession(req, res, authOptions);
 
-  if (!session || !session.user)
-    return res.status(403).json({ message: "Access Denied!" });
+  if(req.method === 'GET') return GET(res);
+
+  return res.status(405).json({message: "Method not allowed."})
+}
+
+
+async function GET(res){
   try {
     await connectDB();
 

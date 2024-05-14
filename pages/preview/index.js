@@ -14,12 +14,12 @@ export default function Home() {
 
   return (
     <main
-      className={`${font.className} w-full min-h-screen max-h-screen bg-background grid grid-cols-1 grid-rows-[126px_1fr] bg-[#FAFAFA]`}
+      className={`${font.className} w-full min-h-screen max-h-screen grid grid-cols-1 bg-background`}
     >
       <NextAuthProvider>
         <PlatformProvider>
           <ProfileProvider>
-            <div className="w-screen h-screen bg-[#FAFAFA]">
+            <div className="w-screen h-screen bg-background">
               <PreviewNavBar />
               <ProfileCard />
             </div>

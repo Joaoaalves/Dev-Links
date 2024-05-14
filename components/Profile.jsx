@@ -65,7 +65,7 @@ function ImageUpload() {
 
   return (
     <div
-      className="flex items-center justify-between w-full bg-[#FAFAFA] rounded-xl p-4 mb-6"
+      className="flex flex-col gap-y-4 md:flex-row items-center justify-between w-full bg-background rounded-xl p-4 mb-6"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -77,13 +77,15 @@ function ImageUpload() {
         {image ? (
           <img
             src={image}
-            alt="Uploaded"
+            alt="Uploaded photo."
             className="w-full h-full object-cover rounded-xl"
           />
         ) : (
+          <>
           <Image width={33} height={28} src={"/images/icon-upload-image.svg"} />
+          <span className="text-primary font-bold">+ Upload Image</span>
+          </>
         )}
-        <span className="text-primary font-bold">+ Upload Image</span>
       </div>
       <p className="text-borders text-xs">
         Image must be below 1024x1024px. Use PNG or JPG format.
@@ -102,7 +104,7 @@ function PersonalInfo() {
   const { email, setEmail, firstName, setFirstName, lastName, setLastName } =
     useProfile();
   return (
-    <div className="flex flex-col items-center justify-start w-full bg-[#FAFAFA] rounded-xl p-4 gap-y-3">
+    <div className="flex flex-col items-center justify-start w-full bg-background rounded-xl p-4 gap-y-3">
       <ProfileInput
         label={"First name*"}
         placeholder={"e.g. John"}
@@ -189,7 +191,7 @@ function SaveButton() {
   return (
     <button
       onClick={onClick}
-      className="p-2 w-36 bg-primary text-white rounded-lg ms-auto me-4 hover:bg-secondary hover:scale-105 transition-all duration-150 mt-auto"
+      className="p-2 w-full md:w-36 bg-primary text-white rounded-lg ms-auto me-4 hover:bg-secondary hover:scale-105 transition-all duration-150 mt-6 md:mt-auto"
     >
       Save
     </button>

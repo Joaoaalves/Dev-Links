@@ -15,14 +15,14 @@ import { Toaster } from "@/components/ui/sonner";
 export default function Home() {
   return (
     <main
-      className={`${font.className} w-full min-h-screen max-h-screen bg-background grid grid-cols-1 grid-rows-[126px_1fr] bg-[#FAFAFA]`}
+      className={`${font.className} w-full min-h-screen max-h-screen grid grid-cols-1 grid-rows-[126px_1fr] bg-background`}
     >
       <NextAuthProvider>
         <PlatformProvider>
           <ProfileProvider>
             <NavBar />
             <div className="flex items-start justify-start w-screen p-6 gap-x-6 max-h-[85vh]">
-              <div className="w-2/5 h-full flex justify-center">
+              <div className="hidden md:w-2/5 h-full md:flex justify-center">
                 <PhoneMockup.Root>
                   <PhoneMockup.ProfileImage />
                   <PhoneMockup.Email />
@@ -31,7 +31,7 @@ export default function Home() {
                 </PhoneMockup.Root>
               </div>
 
-              <div className="w-3/5 h-full flex flex-col items-center">
+              <div className="w-full md:w-3/5 h-full flex flex-col items-center">
                 <Profile />
               </div>
             </div>

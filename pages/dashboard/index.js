@@ -14,14 +14,14 @@ const font = Instrument_Sans({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main
-      className={`${font.className} w-full min-h-screen max-h-screen bg-background grid grid-cols-1 grid-rows-[126px_1fr] bg-[#FAFAFA]`}
+      className={`${font.className} w-full min-h-screen max-h-screen bg-background grid grid-cols-1 grid-rows-[96px_1fr] md:grid-rows-[126px_1fr]`}
     >
       <NextAuthProvider>
         <PlatformProvider>
           <ProfileProvider>
             <NavBar />
-            <div className="flex items-start justify-start w-full p-6 gap-x-6 max-h-[85vh]">
-              <div className="w-2/5 h-full flex justify-center">
+            <div className="flex items-start justify-start w-full p-3 md:p-6 gap-x-6 max-h-[90vh] md:max-h-[86vh]">
+              <div className="hidden md:w-2/5 h-full md:flex justify-center">
                 <PhoneMockup.Root>
                   <PhoneMockup.ProfileImage />
                   <PhoneMockup.Name />
@@ -30,7 +30,7 @@ export default function Home() {
                 </PhoneMockup.Root>
               </div>
 
-              <div className="w-3/5 h-full flex flex-col items-center">
+              <div className="w-full md:w-3/5 h-full flex flex-col items-center">
                 <Links />
               </div>
             </div>

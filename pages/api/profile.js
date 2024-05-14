@@ -34,7 +34,6 @@ async function POST(req, res, session) {
           folder: "profile_images",
         });
         image = uploadResult.url;
-        console.log("Image saved successfully!\n", uploadResult);
       }
       await User.findOneAndUpdate(
         { email: session.user.email },

@@ -1,39 +1,26 @@
-"use client";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ProfileProvider } from "@/hooks/useProfile";
+import { ProfileCard } from "@/components/ProfileCard";
+import { PlatformProvider } from "@/hooks/usePlatforms";
 
 export default function Page() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const userId = router.query.user
 
-  useEffect(() => {
-    if (router.query.user) {
-      const getUser = async () => {
-        try {
-          const response = await fetch(
-            `/api/user?user_id=${router.query.user}`,
-          );
-          if (response.ok) {
-            const data = await response.json();
-            setUser(data.user);
-          } else {
-            console.error("Failed to fetch user data");
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      };
-
-      getUser();
-    }
-  }, [router.query.user]);
-
-  if (!user) {
-    return <h1>Loading...</h1>;
+  if (!userId) {
+    return <h1>Invalid Url...</h1>;
   }
 
   return (
-    <div>
+    <div className="w-screen h-screen bg-background">
+      <div className="bg-primary w-screen h-96 rounded-b-[24px]">
+
+      </div>
+          <PlatformProvider>
+            <ProfileProvider userId={userId}>
+              <ProfileCard />
+            </ProfileProvider>
+        </PlatformProvider>
     </div>
   );
 }
