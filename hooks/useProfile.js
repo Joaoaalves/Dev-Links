@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 const ProfileContext = createContext();
 
 export const ProfileProvider = ({ children }) => {
+  const [userId, setUserId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,15 +21,16 @@ export const ProfileProvider = ({ children }) => {
 
   const getUserInfoFromDB = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/user");
+      const res = await fetch('/api/profile');
       const data = await res.json();
-      const user = data.user
+      const user = data.user;
 
-      setLinks(user?.links || [])
-      setEmail(user?.email || '')
-      setFirstName(user?.firstName || '')
-      setLastName(user?.lastName || '')
-      setImage(user?.image || '')
+      setUserId(user?._id || "");
+      setLinks(user?.links || []);
+      setEmail(user?.email || "");
+      setFirstName(user?.firstName || "");
+      setLastName(user?.lastName || "");
+      setImage(user?.image || "");
     } catch (error) {
       console.error("Erro ao buscar links do banco de dados:", error);
     }
@@ -86,6 +88,7 @@ export const ProfileProvider = ({ children }) => {
   return (
     <ProfileContext.Provider
       value={{
+        userId,
         firstName,
         setFirstName,
         lastName,
@@ -100,8 +103,8 @@ export const ProfileProvider = ({ children }) => {
         setImage,
         swapLinksPosition,
         saveLinks,
-        error, 
-        setError
+        error,
+        setError,
       }}
     >
       {children}

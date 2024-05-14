@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 export default function NavBar() {
-  const router = useRouter()
+  const router = useRouter();
 
   const handlePreview = () => {
-    router.push('/preview')
-  }
+    router.push("/preview");
+  };
 
   return (
     <div className="p-12 h-20 flex items-center justify-between rounded-xl mx-6 mt-6 bg-white">
@@ -19,7 +19,10 @@ export default function NavBar() {
 
       <Links />
 
-      <button onClick={handlePreview} className="bg-white text-primary border-2 border-primary rounded-lg p-2 hover:bg-primary hover:text-white transition-all duration-300">
+      <button
+        onClick={handlePreview}
+        className="bg-white text-primary border-2 border-primary rounded-lg p-2 hover:bg-primary hover:text-white transition-all duration-300"
+      >
         Preview
       </button>
     </div>

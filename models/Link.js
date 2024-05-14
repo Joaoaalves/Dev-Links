@@ -1,20 +1,20 @@
 import mongoose from "mongoose";
 
 const linkSchema = new mongoose.Schema(
-    {
-      platform: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Platform",
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
+  {
+    platform: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Platform",
+      required: true,
     },
-    {
-      timestamps: true,
+    url: {
+      type: String,
+      required: true,
     },
-  );
+  },
+  {
+    timestamps: true,
+  },
+);
 
-  export default mongoose.models.Link || mongoose.model("Link", linkSchema);
+export default mongoose.models.Link || mongoose.model("Link", linkSchema);

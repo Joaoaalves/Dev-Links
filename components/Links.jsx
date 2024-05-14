@@ -20,7 +20,7 @@ import { useProfile } from "@/hooks/useProfile";
 import { usePlatforms } from "@/hooks/usePlatforms";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
-import { toast } from "sonner"
+import { toast } from "sonner";
 
 export default function Links() {
   const { links, addLink, swapLinksPosition } = useProfile();
@@ -31,31 +31,28 @@ export default function Links() {
 
   const handleSaveLinks = async () => {
     const saveLinks = async () => {
-      await fetch('/api/link', {
+      await fetch("/api/link", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-          links
+        body: JSON.stringify({
+          links,
         }),
-      }).then(
-        (res) => {
-          if(res.error)
-            console.log(res.error)
-          else
-            toast("Your changes have been successfully saved!", {
-              position: "bottom-center",
-              style: {
-                backgroundColor: "#333333",
-                color: 'white',
-                textAlign: 'center',
+      }).then((res) => {
+        if (res.error) console.log(res.error);
+        else
+          toast("Your changes have been successfully saved!", {
+            position: "bottom-center",
+            style: {
+              backgroundColor: "#333333",
+              color: "white",
+              textAlign: "center",
             },
-          })
-        }
-      )
+          });
+      });
     };
-    saveLinks()
+    saveLinks();
   };
 
   return (
@@ -67,38 +64,45 @@ export default function Links() {
       </p>
       <NewLinkButton onClick={addLink}>+ Add new link</NewLinkButton>
       <ScrollArea className="w-full whitespace-nowrap rounded-md pe-4">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="w-full">
-          <Droppable droppableId="droppable" >
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {links.map((link, index) => (
-                  <Draggable key={link._id} draggableId={link._id} index={index}>
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <Link
-                          link={link}
-                          index={index + 1}
-                          key={`link-${link.id}`}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
-      </DragDropContext>
-      <ScrollBar orientation="vertical"/>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="w-full">
+            <Droppable droppableId="droppable">
+              {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {links.map((link, index) => (
+                    <Draggable
+                      key={link._id}
+                      draggableId={link._id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <Link
+                            link={link}
+                            index={index + 1}
+                            key={`link-${link.id}`}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+        </DragDropContext>
+        <ScrollBar orientation="vertical" />
       </ScrollArea>
       {links && (
-        <button onClick={handleSaveLinks} className="p-2 w-36 bg-primary text-white rounded-lg ms-auto me-4 mt-6 hover:bg-secondary hover:scale-105 transition-all duration-150">
+        <button
+          onClick={handleSaveLinks}
+          className="p-2 w-36 bg-primary text-white rounded-lg ms-auto me-4 mt-6 hover:bg-secondary hover:scale-105 transition-all duration-150"
+        >
           Save
         </button>
       )}
@@ -120,7 +124,7 @@ function NewLinkButton({ onClick }) {
 function Link({ link, index }) {
   const [isOpen, setIsOpen] = useState(true);
   const { removeLink } = useProfile();
-  const {getPlatform} = usePlatforms();
+  const { getPlatform } = usePlatforms();
 
   return (
     <Collapsible
@@ -133,7 +137,9 @@ function Link({ link, index }) {
           <div className="flex gap-x-2 items-center cursor-pointer">
             <Image src="/images/icon-drag-and-drop.svg" width={12} height={6} />
             <h4 className="font-bold text-borders">
-              {link?.platform ? getPlatform(link.platform).name : `Link #${index}`}
+              {link?.platform
+                ? getPlatform(link.platform).name
+                : `Link #${index}`}
             </h4>
           </div>
         </CollapsibleTrigger>
@@ -174,25 +180,25 @@ function LinkSelect({ link }) {
         </SelectTrigger>
         <SelectContent>
           {platforms &&
-            platforms.map((platform) =>  (
-                <SelectItem
-                  value={platform._id}
-                  key={`platform-${platform._id}`}
-                  className="cursor-pointer hover:bg-[#d3d3d3] !border-light-gray"
-                >
-                  <div className="flex items-center gap-x-4  w-full p-2">
-                    <Image
-                      src={platform.icon}
-                      alt={`Icon`}
-                      width={16}
-                      height={16}
-                      style={{
-                        filter: "saturate(1) brightness(1) invert(1)",
-                      }}
-                    />
-                    {platform.name}
-                  </div>
-                </SelectItem>
+            platforms.map((platform) => (
+              <SelectItem
+                value={platform._id}
+                key={`platform-${platform._id}`}
+                className="cursor-pointer hover:bg-[#d3d3d3] !border-light-gray"
+              >
+                <div className="flex items-center gap-x-4  w-full p-2">
+                  <Image
+                    src={platform.icon}
+                    alt={`Icon`}
+                    width={16}
+                    height={16}
+                    style={{
+                      filter: "saturate(1) brightness(1) invert(1)",
+                    }}
+                  />
+                  {platform.name}
+                </div>
+              </SelectItem>
             ))}
         </SelectContent>
       </Select>

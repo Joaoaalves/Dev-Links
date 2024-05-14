@@ -1,3 +1,3 @@
-import { signOut } from "next-auth/react"
+import { signOut } from "next-auth/react";
 
-export default () => signOut
+export default () => signOut;

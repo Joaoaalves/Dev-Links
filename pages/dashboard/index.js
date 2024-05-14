@@ -8,7 +8,7 @@ import { ProfileProvider } from "@/hooks/useProfile";
 import { PlatformProvider } from "@/hooks/usePlatforms";
 import { NextAuthProvider } from "@/contexts/AuthProvider";
 
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 const font = Instrument_Sans({ subsets: ["latin"] });
 
 export default function Home() {

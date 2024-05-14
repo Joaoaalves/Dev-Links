@@ -1,4 +1,3 @@
-import { Regex } from "lucide-react";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const PlatformContext = createContext();
@@ -23,13 +22,11 @@ export const PlatformProvider = ({ children }) => {
   };
 
   const getPlatform = (platformId) => {
-    return platforms.find(platform => platform._id === platformId);
-  }
+    return platforms.find((platform) => platform._id === platformId);
+  };
 
   return (
-    <PlatformContext.Provider
-      value={{ platforms, getPlatform, validateUrl }}
-    >
+    <PlatformContext.Provider value={{ platforms, getPlatform, validateUrl }}>
       {children}
     </PlatformContext.Provider>
   );

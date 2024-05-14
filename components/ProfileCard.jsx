@@ -1,64 +1,59 @@
 import { useProfile } from "@/hooks/useProfile";
 import { usePlatforms } from "@/hooks/usePlatforms";
 import Image from "next/image";
-export function ProfileCard(){
-    return (
-        <div className="flex flex-col items-center rounded-[24px] bg-white shadow-md p-12 w-96 min-h-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <ProfileImage />
-            <Name />
-            <Email />
-            <Links />
-        </div>
-    )
+export function ProfileCard() {
+  return (
+    <div className="flex flex-col items-center rounded-[24px] bg-white shadow-md p-12 w-96 min-h-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <ProfileImage />
+      <Name />
+      <Email />
+      <Links />
+    </div>
+  );
 }
 
-function ProfileImage(){
-    const {image, firstName} = useProfile()
+function ProfileImage() {
+  const { image, firstName } = useProfile();
 
-    return (
-        <Image
-        className="rounded-full size-24 z-10 bg-white bg-center border-2 border-primary"
-        src={image}
-        width={96}
-        height={96}
-        alt={`Foto de ${firstName}.`}
-      />
-    )
+  return (
+    <Image
+      className="rounded-full size-24 z-10 bg-white bg-center border-2 border-primary"
+      src={image}
+      width={96}
+      height={96}
+      alt={`Foto de ${firstName}.`}
+    />
+  );
 }
 
-function Name(){
-    const {firstName, lastName} = useProfile()
+function Name() {
+  const { firstName, lastName } = useProfile();
 
-    return (
-        <h1 className="text-2xl font-bold mt-6">{`${firstName} ${lastName}`}</h1>
-    )
+  return (
+    <h1 className="text-2xl font-bold mt-6">{`${firstName} ${lastName}`}</h1>
+  );
 }
 
-function Email(){
-    const {email} = useProfile()
+function Email() {
+  const { email } = useProfile();
 
-    return (
-        <p className="text-borders/80 text-[16px]">{email}</p>
-    )
+  return <p className="text-borders/80 text-[16px]">{email}</p>;
 }
 
-function Links(){
-    const {links} = useProfile()
+function Links() {
+  const { links } = useProfile();
 
-    return (
-        <div className="flex flex-col items-center justify-center gap-y-[20px] min-w-full mt-14">
-            {links && links.map(link => (
-                <Link link={link} />
-            ))}
-        </div>
-    )
+  return (
+    <div className="flex flex-col items-center justify-center gap-y-[20px] min-w-full mt-14">
+      {links && links.map((link) => <Link link={link} />)}
+    </div>
+  );
 }
 
-function Link({link}){
-  const {getPlatform} = usePlatforms()
-  const platform = getPlatform(link.platform)
-  if(!platform)
-    return
+function Link({ link }) {
+  const { getPlatform } = usePlatforms();
+  const platform = getPlatform(link.platform);
+  if (!platform) return;
   return (
     <a
       target="_blank"
@@ -101,4 +96,3 @@ function Link({link}){
     </a>
   );
 }
-     

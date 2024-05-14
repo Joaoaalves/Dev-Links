@@ -5,21 +5,20 @@ import Image from "next/image";
 function Root({ children }) {
   return (
     <div className="bg-white w-full flex items-center justify-center rounded-xl">
-    <div
-      className="relative h-[630px] w-[307px] bg-center bg-no-repeat"
-      style={{ backgroundImage: "url(/images/illustration-phone-mockup.svg" }}
-    >
-      {children}
-    </div>
+      <div
+        className="relative h-[630px] w-[307px] bg-center bg-no-repeat"
+        style={{ backgroundImage: "url(/images/illustration-phone-mockup.svg" }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
 
 function ProfileImage() {
-  const {image, firstName} = useProfile()
-  
-  if(!image)
-    return
+  const { image, firstName } = useProfile();
+
+  if (!image) return;
 
   return (
     <Image
@@ -33,10 +32,9 @@ function ProfileImage() {
 }
 
 function Name() {
-  const {firstName, lastName} = useProfile()
+  const { firstName, lastName } = useProfile();
 
-  if(!firstName)
-    return
+  if (!firstName) return;
 
   return (
     <h1 className="absolute left-1/2 -translate-x-1/2 top-[180px] rounded-lg h-6 w-40 bg-white text-center truncate">
@@ -46,7 +44,7 @@ function Name() {
 }
 
 function Email() {
-  const {email} = useProfile()
+  const { email } = useProfile();
   return (
     <h2 className="absolute left-1/2 -translate-x-1/2 top-[208px] rounded-lg h-4 w-auto bg-white text-center text-xs">
       {email}
@@ -67,10 +65,9 @@ function Links() {
 }
 
 function Link({ link }) {
-  const {getPlatform} = usePlatforms()
-  const platform = getPlatform(link.platform)
-  if(!platform)
-    return
+  const { getPlatform } = usePlatforms();
+  const platform = getPlatform(link.platform);
+  if (!platform) return;
   return (
     <a
       target="_blank"

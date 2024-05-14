@@ -10,7 +10,7 @@ import Profile from "@/components/Profile";
 
 const font = Instrument_Sans({ subsets: ["latin"] });
 
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Home() {
   return (
@@ -24,7 +24,7 @@ export default function Home() {
             <div className="flex items-start justify-start w-screen p-6 gap-x-6 max-h-[85vh]">
               <div className="w-2/5 h-full flex justify-center">
                 <PhoneMockup.Root>
-                <PhoneMockup.ProfileImage />
+                  <PhoneMockup.ProfileImage />
                   <PhoneMockup.Email />
                   <PhoneMockup.Name />
                   <PhoneMockup.Links />
