@@ -2,14 +2,12 @@ import { connectDB } from "@/lib/connectDB";
 import Platform from "@/models/Platform";
 
 export default async function handler(req, res) {
+  if (req.method === "GET") return GET(res);
 
-  if(req.method === 'GET') return GET(res);
-
-  return res.status(405).json({message: "Method not allowed."})
+  return res.status(405).json({ message: "Method not allowed." });
 }
 
-
-async function GET(res){
+async function GET(res) {
   try {
     await connectDB();
 

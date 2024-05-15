@@ -1,3 +1,4 @@
+"use client";
 import { Instrument_Sans } from "next/font/google";
 import Login from "@/components/Login";
 import Image from "next/image";

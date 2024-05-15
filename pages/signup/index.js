@@ -2,6 +2,7 @@ import { Instrument_Sans } from "next/font/google";
 import Signup from "@/components/Signup";
 import Image from "next/image";
 const font = Instrument_Sans({ subsets: ["latin"] });
+import { Toaster } from "sonner";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         />
         <Signup />
       </div>
+      <Toaster />
     </main>
   );
 }

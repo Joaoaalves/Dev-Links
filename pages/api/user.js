@@ -10,24 +10,26 @@ export default async function handler(req, res) {
 async function GET(req, res) {
   try {
     await connectDB();
-    
+
     const { user_id } = req.query;
     if (!user_id || notValidId(user_id)) {
       return res.status(400).json({ message: "Invalid User ID." });
     }
 
-    const user = await User.findById(user_id).populate('links');
-    
+    const user = await User.findById(user_id).populate("links");
+
     if (user) {
       return res.status(200).json({ user });
     }
 
     return res.status(404).json({ message: "User not found" });
   } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 }
 
-function notValidId(id){
-  return id.length !== 24
+function notValidId(id) {
+  return id.length !== 24;
 }

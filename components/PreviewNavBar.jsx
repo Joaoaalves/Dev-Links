@@ -10,10 +10,10 @@ export default function PreviewNavBar() {
 
   const copyToClipboard = () => {
     const textToCopy = `${APP_URL}/links/${userId}`;
-    try{
-      navigator.clipboard.writeText(textToCopy).then(showToast)
-    }catch{
-      fallbackCopyTextToClipboard()
+    try {
+      navigator.clipboard.writeText(textToCopy).then(showToast);
+    } catch {
+      fallbackCopyTextToClipboard();
     }
   };
 
@@ -56,16 +56,16 @@ export default function PreviewNavBar() {
 
   return (
     <div className="bg-primary rounded-b-[32px] w-screen h-96 p-6">
-      <div className="bg-white w-full px-6 py-3 flex flex-wrap items-center justify-center md:justify-between rounded-xl gap-2">
+      <div className="bg-white w-full px-6 py-3 flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-between rounded-xl gap-2">
         <button
           onClick={() => router.push("/dashboard")}
-          className="text-primary border-2 border-primary py-2 px-3 md:px-6 rounded-md hover:bg-primary hover:text-white transition-all duration-200 md:w-fit w-full"
+          className="text-primary border-2 border-primary py-2 px-3 lg:px-6 rounded-md hover:bg-primary hover:text-white transition-all duration-200 lg:w-auto w-full"
         >
           Back to Editor
         </button>
         <button
           onClick={copyToClipboard}
-          className="text-white bg-primary border-2 border-primary py-2 px-3 md:px-6 rounded-md hover:bg-primary/90 transition-all duration-200 md:w-fil w-full"
+          className="text-white bg-primary border-2 border-primary py-2 px-3 lg:px-6 rounded-md hover:bg-primary/90 transition-all duration-200 lg:w-auto w-full"
         >
           Share Link
         </button>

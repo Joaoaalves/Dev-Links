@@ -1,20 +1,19 @@
 import { useProfile } from "@/hooks/useProfile";
 import { usePlatforms } from "@/hooks/usePlatforms";
 import Image from "next/image";
-export function ProfileCard() {
-  const {error} = useProfile()
 
-  if(error)
-    return(
-      <div className="flex flex-col items-center justify-center rounded-[24px] bg-white shadow-md p-12 w-96 min-h-72 mt-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <h1 className="text-red text-center font-bold text-4xl">
-          Error 404
-        </h1>
+export function ProfileCard() {
+  const { error } = useProfile();
+
+  if (error)
+    return (
+      <div className="flex flex-col items-center justify-center rounded-[24px] bg-white shadow-xl p-12 w-96 min-h-72 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <h1 className="text-red text-center font-bold text-4xl">Error 404</h1>
         <span className="text-borders text-xl">An error ocurred!</span>
         <p>Check if your link is correct, if it is, contact us.</p>
       </div>
-    )
-  
+    );
+
   return (
     <div className="flex flex-col items-center rounded-[24px] bg-white shadow-md p-6 sm:p-12 min-w-[90vw] sm:min-w-80 xl:min-w-96 xl:min-h-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <ProfileImage />
@@ -27,9 +26,8 @@ export function ProfileCard() {
 
 function ProfileImage() {
   const { image, firstName } = useProfile();
-  
-  if(!image)
-    return
+
+  if (!image) return;
 
   return (
     <Image
@@ -58,10 +56,11 @@ function Email() {
 
 function Links() {
   const { links } = useProfile();
-  
+
   return (
     <div className="flex flex-col items-center justify-center gap-y-[20px] min-w-full mt-14">
-      {links && links.map((link, index) => <Link link={link} key={`link-${index}`}/>)}
+      {links &&
+        links.map((link, index) => <Link link={link} key={`link-${index}`} />)}
     </div>
   );
 }
@@ -76,7 +75,7 @@ function Link({ link }) {
       href={link.url}
       rel="noopener noreferrer"
       passhref="true"
-      className={`w-full text-sm md:text-md rounded-lg grid grid-cols-[2em_1fr_2em] items-center align-center p-2 sm:p-4 shadow-[0px_2px_6px_4px_rgba(0,0,0,0.08)] font-bold`}
+      className={`w-full text-sm lg:text-md rounded-lg grid grid-cols-[2.5em_1fr_2em] items-center align-center p-2 sm:p-4 shadow-[0px_2px_6px_4px_rgba(0,0,0,0.08)] font-bold`}
       style={{
         backgroundColor: platform.color,
         color: platform.textColor,
@@ -87,7 +86,7 @@ function Link({ link }) {
         width={24}
         height={24}
         alt={`${link.platform}'s Icon`}
-        className="size-5 md:size-6 filter"
+        className="size-5 lg:size-6 filter"
         style={{
           filter:
             platform.textColor === "#ffffff"

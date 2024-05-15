@@ -12,6 +12,8 @@ import { Form } from "@/components/ui/form";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
+import { useRouter } from "next/router";
+
 const formSchema = z.object({
   email: z
     .string()
@@ -21,22 +23,27 @@ const formSchema = z.object({
 });
 
 export default function Login() {
-  const [error, setError] = useState();
+  const router = useRouter();
+
+  const [error, setError] = useState(
+    router?.query?.error ? "Check your credentials." : "",
+  );
+
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values) {
+  async function onSubmit(values) {
     const { email, password } = values;
-    signIn("credentials", {
-      email,
-      password,
-      callbackUrl: "/dashboard",
-    }).then((res) => {
-      if (res.error) {
-        setError("Check your credentials!");
-      }
-    });
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/dashboard",
+      });
+    } catch (error) {
+      console.error("Sign-in error:", error);
+    }
   }
 
   return (
@@ -46,11 +53,15 @@ export default function Login() {
         Add your details below to get back into the app
       </p>
       <Form {...form}>
-        {error && <span className="text-center text-red">{error}</span>}
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 mt-10"
+          className="space-y-6 mt-10 flex flex-col"
         >
+          {error && (
+            <span className="text-white bg-red/80 p-2 rounded-md self-center">
+              {error}
+            </span>
+          )}
           <Input
             type={"email"}
             id={"email"}

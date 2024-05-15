@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+
 export default function NavBar() {
   const router = useRouter();
 
@@ -9,31 +10,37 @@ export default function NavBar() {
   };
 
   return (
-    <div className="p-12 h-20 flex items-center justify-between rounded-xl md:mx-6 md:mt-6 bg-white">
+    <div className="p-12 h-20 flex items-center justify-between rounded-xl lg:mx-6 lg:mt-6 bg-white">
       <Image
         alt="Devlinks Logo"
         width={185}
         height={40}
         src={"/images/logo-devlinks-large.svg"}
-        className="hidden md:block"
+        className="hidden lg:block"
       />
-      
+
       <Image
         alt="Devlinks Logo"
         width={36}
         height={36}
         src={"/images/logo-devlinks-small.svg"}
-        className="block md:hidden"
+        className="block lg:hidden"
       />
-      
+
       <Links />
 
       <button
         onClick={handlePreview}
-        className="bg-white text-primary border border-primary rounded-lg py-2 px-3 md:px-2 hover:bg-primary hover:text-white transition-all duration-300 group"
+        className="bg-white text-primary border border-primary rounded-lg p-2 sm:px-3 lg:px-2 hover:bg-primary hover:text-white transition-all duration-300 group"
       >
-        <span className="hidden md:block">Preview</span>
-        <Image src={"/images/icon-preview-header.svg"} width={20} height={20} className="group-hover:filter group-hover:invert group-hover:brightness-0 transition-all duration-300 md:hidden" alt="Preview icon."/>
+        <span className="hidden lg:block">Preview</span>
+        <Image
+          src={"/images/icon-preview-header.svg"}
+          width={20}
+          height={20}
+          className="group-hover:filter group-hover:invert group-hover:brightness-0 transition-all duration-300 lg:hidden"
+          alt="Preview icon."
+        />
       </button>
     </div>
   );
@@ -65,8 +72,9 @@ function Links() {
                 ? "brightness(0) invert(52%) sepia(100%) saturate(7491%) hue-rotate(257deg) brightness(97%) contrast(94%)"
                 : "",
             }}
+            className="w-5 sm:w-6"
           />
-          <span className="hidden md:block">Links</span>
+          <span className="hidden lg:block">Links</span>
         </Link>
         <Link href={"/profile"} isActive={isProfileActive}>
           <Image
@@ -79,8 +87,9 @@ function Links() {
                 ? "brightness(0) invert(52%) sepia(100%) saturate(7491%) hue-rotate(257deg) brightness(97%) contrast(94%)"
                 : "",
             }}
+            className="w-5 sm:w-6"
           />
-          <span className="hidden md:block">Profile Details</span>
+          <span className="hidden lg:block">Profile Details</span>
         </Link>
       </ul>
     </nav>
@@ -91,7 +100,7 @@ function Link({ href, isActive, children }) {
   return (
     <a
       href={href}
-      className={`bg-white text-borders flex items-center justify-center gap-x-2 px-5 py-2 md:px-2 rounded`}
+      className={`bg-white text-borders flex items-center justify-center gap-x-2 p-2 sm:px-5 sm:py-2 lg:px-2 rounded`}
       style={{
         backgroundColor: isActive ? "#EFEBFF" : "#fff",
         color: isActive ? "#633CFF" : "",

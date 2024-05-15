@@ -11,7 +11,7 @@ export default function Profile() {
         Add your details to create a personal touch to your profile.
       </p>
       {error && (
-        <span className="bg-red/50 text-red rounded-md p-2 font-bold mb-4">
+        <span className="bg-red/80 text-white rounded-md p-2 mb-4">
           {error}
         </span>
       )}
@@ -30,7 +30,7 @@ function ImageUpload() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const img = new Image();
+      const img = new window.Image();
       img.onload = () => {
         if (img.width > 1024 || img.height > 1024) {
           setError("Image must be below 1024x1024px.");
@@ -65,7 +65,7 @@ function ImageUpload() {
 
   return (
     <div
-      className="flex flex-col gap-y-4 md:flex-row items-center justify-between w-full bg-background rounded-xl p-4 mb-6"
+      className="flex flex-col gap-y-4 lg:flex-row items-center justify-between w-full bg-background rounded-xl p-4 mb-6"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -82,8 +82,12 @@ function ImageUpload() {
           />
         ) : (
           <>
-          <Image width={33} height={28} src={"/images/icon-upload-image.svg"} />
-          <span className="text-primary font-bold">+ Upload Image</span>
+            <Image
+              width={33}
+              height={28}
+              src={"/images/icon-upload-image.svg"}
+            />
+            <span className="text-primary font-bold">+ Upload Image</span>
           </>
         )}
       </div>
@@ -191,7 +195,7 @@ function SaveButton() {
   return (
     <button
       onClick={onClick}
-      className="p-2 w-full md:w-36 bg-primary text-white rounded-lg ms-auto me-4 hover:bg-secondary hover:scale-105 transition-all duration-150 mt-6 md:mt-auto"
+      className="p-2 w-full lg:w-36 bg-primary text-white rounded-lg ms-auto me-4 hover:bg-secondary hover:scale-105 transition-all duration-150 mt-6 lg:mt-auto"
     >
       Save
     </button>

@@ -21,18 +21,18 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
 
   const getUserInfoFromDB = async () => {
     try {
-      const endpoint = userId ? `/api/user?user_id=${userId}` : '/api/profile';
+      const endpoint = userId ? `/api/user?user_id=${userId}` : "/api/profile";
       const res = await fetch(endpoint);
 
       if (!res.ok) {
-        setError('Failed to fetch user profile.')
+        setError("Failed to fetch user profile.");
         throw new Error(`Failed to fetch user profile: ${res.statusText}`);
       }
 
       const data = await res.json();
 
       if (!data.user) {
-        setError('User data is not available')
+        setError("User data is not available");
         throw new Error("User data is not available");
       }
 
@@ -49,7 +49,6 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
       setError("Failed to fetch user profile. Please check the user ID.");
     }
   };
-
 
   useEffect(() => {
     getUserInfoFromDB();
@@ -76,7 +75,7 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
           };
         }
         return link;
-      })
+      }),
     );
   };
 

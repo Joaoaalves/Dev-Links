@@ -11,7 +11,6 @@ import { Toaster } from "@/components/ui/sonner";
 import PreviewNavBar from "@/components/PreviewNavBar";
 
 export default function Home() {
-
   return (
     <main
       className={`${font.className} w-full min-h-screen max-h-screen grid grid-cols-1 bg-background`}

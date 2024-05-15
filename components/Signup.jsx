@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 
 import { Form } from "@/components/ui/form";
 
+import { toast } from "sonner";
+import { useRouter } from "next/router";
+
 const formSchema = z
   .object({
     email: z
@@ -20,10 +23,12 @@ const formSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",
-    path: ["password"],
+    path: ["confirmPassword"],
   });
 
-export default function Login() {
+export default function Signup() {
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -40,10 +45,26 @@ export default function Login() {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.message || "Something went wrong");
+        return toast(data.message, {
+          position: "bottom-center",
+          style: {
+            backgroundColor: "#FF3939",
+            color: "white",
+            textAlign: "center",
+          },
+        });
       }
 
-      router.push("/");
+      toast("User created successfuly.", {
+        position: "bottom-center",
+        style: {
+          backgroundColor: "#333333",
+          color: "white",
+          textAlign: "center",
+        },
+        onDismiss: () => router.push("/"),
+        onAutoClose: () => router.push("/"),
+      });
     } catch (error) {
       console.error("Error signing up:", error);
     }
@@ -58,7 +79,7 @@ export default function Login() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 mt-10"
+          className="space-y-6 mt-10 flex flex-col"
         >
           <Input
             type={"email"}

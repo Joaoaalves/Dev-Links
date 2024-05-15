@@ -31,17 +31,20 @@ export default function Links() {
 
   const handleSaveLinks = async () => {
     const saveLinks = async () => {
-      const emptyLinkExists = links.some(link => !link.platform || !link.url);
+      const emptyLinkExists = links.some((link) => !link.platform || !link.url);
 
-      if(emptyLinkExists)
-        return toast("Please remove or complete all empty links before submitting.", {
-          position: "bottom-center",
-          style: {
-            backgroundColor: "#FF3939",
-            color: "white",
-            textAlign: "center",
+      if (emptyLinkExists)
+        return toast(
+          "Please remove or complete all empty links before submitting.",
+          {
+            position: "bottom-center",
+            style: {
+              backgroundColor: "#FF3939",
+              color: "white",
+              textAlign: "center",
+            },
           },
-      });
+        );
 
       await fetch("/api/link", {
         method: "POST",
@@ -52,7 +55,15 @@ export default function Links() {
           links,
         }),
       }).then((res) => {
-        if (res.error) console.log(res.error);
+        if (res.error)
+          toast("An error ocurred when tryed to save your changes.", {
+            position: "bottom-center",
+            style: {
+              backgroundColor: "#FF3939",
+              color: "white",
+              textAlign: "center",
+            },
+          });
         else
           toast("Your changes have been successfully saved!", {
             position: "bottom-center",
@@ -68,53 +79,57 @@ export default function Links() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-start bg-white rounded-xl p-6 md:p-10">
-      <h1 className="mb-2 text-2xl md:text-[32px] font-bold">Customize your links</h1>
+    <div className="w-full h-full flex flex-col items-start bg-white rounded-xl p-6 lg:p-10">
+      <h1 className="mb-2 text-2xl lg:text-[32px] font-bold">
+        Customize your links
+      </h1>
       <p className="mb-10 text-borders text-[16px]">
         Add/edit/remove links below and then share all your profiles with the
         world!
       </p>
       <NewLinkButton onClick={addLink}>+ Add new link</NewLinkButton>
-      {links && links.length > 0 && <ScrollArea className="w-full whitespace-nowrap rounded-md pe-4">
-        <DragDropContext onDragEnd={onDragEnd}>
-          <div className="w-full">
-            <Droppable droppableId="droppable">
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {links.map((link, index) => (
-                    <Draggable
-                      key={link._id}
-                      draggableId={link._id}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <Link
-                            link={link}
-                            index={index + 1}
-                            key={`link-${link.id}`}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
-        </DragDropContext>
-        <ScrollBar orientation="vertical" />
-      </ScrollArea>}
+      {links && links.length > 0 && (
+        <ScrollArea className="w-full whitespace-nowrap rounded-md pe-4">
+          <DragDropContext onDragEnd={onDragEnd}>
+            <div className="w-full">
+              <Droppable droppableId="droppable">
+                {(provided) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {links.map((link, index) => (
+                      <Draggable
+                        key={link._id}
+                        draggableId={link._id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <Link
+                              link={link}
+                              index={index + 1}
+                              key={`link-${link.id}`}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
+          </DragDropContext>
+          <ScrollBar orientation="vertical" />
+        </ScrollArea>
+      )}
       {links.length === 0 && <GetStarted />}
       {links.length > 0 && (
         <button
           onClick={handleSaveLinks}
-          className="p-2 w-full md:w-36 bg-primary text-white rounded-lg ms-auto me-4 mt-auto hover:bg-secondary hover:scale-105 transition-all duration-150"
+          className="p-2 w-full lg:w-36 bg-primary text-white rounded-lg ms-auto me-4 mt-auto hover:bg-secondary hover:scale-105 transition-all duration-150"
         >
           Save
         </button>
@@ -148,7 +163,12 @@ function Link({ link, index }) {
       <div className="flex items-center justify-between space-x-4">
         <CollapsibleTrigger asChild>
           <div className="flex gap-x-2 items-center cursor-pointer">
-            <Image src="/images/icon-drag-and-drop.svg" width={12} height={6} alt="Drag and drop icon."/>
+            <Image
+              src="/images/icon-drag-and-drop.svg"
+              width={12}
+              height={6}
+              alt="Drag and drop icon."
+            />
             <h4 className="font-bold text-borders">
               {link?.platform
                 ? getPlatform(link.platform).name
@@ -171,14 +191,25 @@ function Link({ link, index }) {
   );
 }
 
-function GetStarted(){
+function GetStarted() {
   return (
     <div className="bg-background flex flex-col items-center justify-center w-full h-full px-8">
-      <Image src={'/images/illustration-empty.svg'} width={250} height={160} alt="Image of a hand touching a table screen."/>
-      <h1 className="text-[32px] font-bold text-center text-dark-gray">Let’s get you started</h1>
-      <p className="text-[16px] text-borders text-center max-w-96">Use the “Add new link” button to get started. Once you have more than one link, you can reorder and edit them. We’re here to help you share your profiles with everyone!</p>
+      <Image
+        src={"/images/illustration-empty.svg"}
+        width={250}
+        height={160}
+        alt="Image of a hand touching a table screen."
+      />
+      <h1 className="text-[32px] font-bold text-center text-dark-gray">
+        Let’s get you started
+      </h1>
+      <p className="text-[16px] text-borders text-center max-w-96">
+        Use the “Add new link” button to get started. Once you have more than
+        one link, you can reorder and edit them. We’re here to help you share
+        your profiles with everyone!
+      </p>
     </div>
-  )
+  );
 }
 
 function LinkSelect({ link }) {
