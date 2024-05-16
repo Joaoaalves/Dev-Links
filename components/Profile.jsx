@@ -29,6 +29,7 @@ function ImageUpload() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    setError('')
     if (file) {
       const img = new window.Image();
       img.onload = () => {
@@ -71,15 +72,21 @@ function ImageUpload() {
     >
       <span className="text-borders">Profile Picture</span>
       <div
-        className="size-48 bg-[#EFEBFF] flex flex-col items-center justify-center cursor-pointer rounded-lg"
+        className="size-48 bg-[#EFEBFF] flex flex-col items-center justify-center cursor-pointer rounded-lg relative"
         onClick={() => document.getElementById("file-input").click()}
       >
         {image ? (
-          <img
-            src={image}
-            alt="Uploaded photo."
-            className="w-full h-full object-cover rounded-xl"
-          />
+          <div className="relative w-full h-full group rounded-xl transition-all duration-500">
+            <Image
+              width={192}
+              height={192}
+              src={image}
+              alt="Uploaded photo."
+              className="w-full h-full object-cover rounded-xl"
+            />
+            <div className="absolute inset-0 bg-black opacity-40 rounded-lg group-hover:opacity-50 transition-all duration-500"></div>
+            <span className="text-white font-black absolute inset-0 flex items-center justify-center drop-shadow-[0px_0px_2px_rgba(0,0,0,0.5)]">+ Upload Image</span>
+          </div>
         ) : (
           <>
             <Image
