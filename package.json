@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-on-netlify",
     "start": "next start",
     "lint": "next lint",
     "pretty": "prettier --check --ignore-path .gitignore .",
@@ -27,6 +28,7 @@
     "mongoose": "^8.3.3",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
+    "next-on-netlify": "^2.7.2",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-beautiful-dnd": "^13.1.1",
