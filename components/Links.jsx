@@ -107,7 +107,7 @@ export default function Links() {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <Link
+                            <UserLink
                               link={link}
                               index={index + 1}
                               key={`link-${link.id}`}
@@ -149,7 +149,7 @@ function NewLinkButton({ onClick }) {
   );
 }
 
-function Link({ link, index }) {
+function UserLink({ link, index }) {
   const [isOpen, setIsOpen] = useState(true);
   const { removeLink } = useProfile();
   const { getPlatform } = usePlatforms();
@@ -172,7 +172,7 @@ function Link({ link, index }) {
             <h4 className="font-bold text-borders">
               {link?.platform
                 ? getPlatform(link.platform).name
-                : `Link #${index}`}
+                : `UserLink #${index}`}
             </h4>
           </div>
         </CollapsibleTrigger>
@@ -277,7 +277,7 @@ function LinkInput({ link }) {
 
   return (
     <div className="flex flex-col items-start gap-y-2 w-full">
-      <label className="text-sm font-semibold text-dark-gray">Link</label>
+      <label className="text-sm font-semibold text-dark-gray">UserLink</label>
       <div
         className="grid grid-cols-[2em_1fr] sm:grid-cols-[2em_1fr_10em] grid-rows-1 items-center place-items-center max-w-[90vw] border-[1px] rounded p-3 gap-x-2 w-full"
         style={{
@@ -293,14 +293,14 @@ function LinkInput({ link }) {
         <input
           onChange={(e) => onChange(e.target.value)}
           type="text"
-          name="Link"
+          name="UserLink"
           id=""
           value={link.url}
           className="border-0 w-full ring-0 outline-none"
         />
         {!validLink && (
           <span className="hidden sm:block !text-red ms-auto me-3 text-[10px]">
-            Invalid Link
+            Invalid UserLink
           </span>
         )}
       </div>

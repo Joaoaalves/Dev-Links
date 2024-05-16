@@ -1,6 +1,7 @@
 import { useProfile } from "@/hooks/useProfile";
 import { usePlatforms } from "@/hooks/usePlatforms";
 import Image from "next/image";
+import Link from 'next/link'
 
 export function ProfileCard() {
   const { error } = useProfile();
@@ -60,17 +61,17 @@ function Links() {
   return (
     <div className="flex flex-col items-center justify-center gap-y-[20px] min-w-full mt-14">
       {links &&
-        links.map((link, index) => <Link link={link} key={`link-${index}`} />)}
+        links.map((link, index) => <UserLink link={link} key={`link-${index}`} />)}
     </div>
   );
 }
 
-function Link({ link }) {
+function UserLink({ link }) {
   const { getPlatform } = usePlatforms();
   const platform = getPlatform(link.platform);
   if (!platform) return;
   return (
-    <a
+    <Link
       target="_blank"
       href={link.url}
       rel="noopener noreferrer"
@@ -108,6 +109,6 @@ function Link({ link }) {
               : "saturate(1) brightness(1) invert(1)",
         }}
       />
-    </a>
+    </Link>
   );
 }
