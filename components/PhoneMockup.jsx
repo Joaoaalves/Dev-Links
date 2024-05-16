@@ -1,6 +1,7 @@
 import { usePlatforms } from "@/hooks/usePlatforms";
 import { useProfile } from "@/hooks/useProfile";
 import Image from "next/image";
+import Link from 'next/link'
 
 function Root({ children }) {
   return (
@@ -58,19 +59,19 @@ function Links() {
     <div className="absolute top-[277px] left-1/2 -translate-x-1/2  w-[237px]  flex flex-col items-center gap-y-5">
       {links &&
         links.map((link, index) => (
-          <Link link={link} key={`mockupLink-${index}`} />
+          <UserLink link={link} key={`mockupLink-${index}`} />
         ))}
     </div>
   );
 }
 
-function Link({ link }) {
+function UserLink({ link }) {
   const { getPlatform } = usePlatforms();
   const platform = getPlatform(link.platform);
 
   if (!platform) return;
   return (
-    <a
+    <Link
       target="_blank"
       href={link.url}
       rel="noopener noreferrer"
@@ -108,7 +109,7 @@ function Link({ link }) {
               : "saturate(1) brightness(1) invert(1)",
         }}
       />
-    </a>
+    </Link>
   );
 }
 

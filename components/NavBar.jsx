@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from 'next/link'
 
 export default function NavBar() {
   const router = useRouter();
@@ -61,7 +62,7 @@ function Links() {
   return (
     <nav>
       <ul className="flex items-center justify-between gap-x-4">
-        <Link href={"/dashboard"} isActive={isDashBoardActive}>
+        <NavLink href={"/dashboard"} isActive={isDashBoardActive}>
           <Image
             alt="Links dashboard icon."
             width={24}
@@ -75,8 +76,8 @@ function Links() {
             className="w-5 sm:w-6"
           />
           <span className="hidden lg:block">Links</span>
-        </Link>
-        <Link href={"/profile"} isActive={isProfileActive}>
+        </NavLink>
+        <NavLink href={"/profile"} isActive={isProfileActive}>
           <Image
             alt="Profile link icon."
             width={24}
@@ -90,15 +91,15 @@ function Links() {
             className="w-5 sm:w-6"
           />
           <span className="hidden lg:block">Profile Details</span>
-        </Link>
+        </NavLink>
       </ul>
     </nav>
   );
 }
 
-function Link({ href, isActive, children }) {
+function NavLink({ href, isActive, children }) {
   return (
-    <a
+    <Link
       href={href}
       className={`bg-white text-borders flex items-center justify-center gap-x-2 p-2 sm:px-5 sm:py-2 lg:px-2 rounded`}
       style={{
@@ -107,6 +108,6 @@ function Link({ href, isActive, children }) {
       }}
     >
       {children}
-    </a>
+    </Link>
   );
 }

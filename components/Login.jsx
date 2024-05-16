@@ -14,6 +14,8 @@ import { useState } from "react";
 
 import { useRouter } from "next/router";
 
+import Link from 'next/link'
+
 const formSchema = z.object({
   email: z
     .string()
@@ -82,9 +84,9 @@ export default function Login() {
           <Button>Login</Button>
           <p className="text-dark-gray text-xs text-center xl:text-md">
             Don’t have an account?{" "}
-            <a className="text-primary cursor-pointer" href="/signup">
+            <Link className="text-primary cursor-pointer" href="/signup">
               Create account
-            </a>
+            </Link>
           </p>
         </form>
       </Form>

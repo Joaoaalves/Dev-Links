@@ -12,6 +12,8 @@ import { Form } from "@/components/ui/form";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
 
+import Link from 'next/link'
+
 const formSchema = z
   .object({
     email: z
@@ -114,9 +116,9 @@ export default function Signup() {
           <Button>Create new account</Button>
           <p className="text-dark-gray text-xs text-center xl:text-md">
             Already have an account?{" "}
-            <a className="text-primary cursor-pointer" href="/">
+            <Link className="text-primary cursor-pointer" href="/">
               Login
-            </a>
+            </Link>
           </p>
         </form>
       </Form>
