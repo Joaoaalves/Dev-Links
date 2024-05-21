@@ -4,8 +4,6 @@ import PhoneMockup from "@/components/PhoneMockup";
 import NavBar from "@/components/NavBar";
 import Links from "@/components/Links";
 
-import { ProfileProvider } from "@/hooks/useProfile";
-import { PlatformProvider } from "@/hooks/usePlatforms";
 import { NextAuthProvider } from "@/contexts/AuthProvider";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -16,9 +14,7 @@ export default function Dashboard() {
     <main
       className={`${font.className} w-full min-h-screen max-h-screen bg-background grid grid-cols-1 grid-rows-[96px_1fr] lg:grid-rows-[126px_1fr]`}
     >
-      <NextAuthProvider>
-        <PlatformProvider>
-          <ProfileProvider>
+      
             <NavBar />
             <div className="flex items-start justify-start w-full p-3 lg:p-6 gap-x-6 max-h-[90vh] lg:max-h-[86vh]">
               <div className="hidden lg:w-2/5 h-full lg:flex justify-center">
@@ -34,9 +30,6 @@ export default function Dashboard() {
                 <Links />
               </div>
             </div>
-          </ProfileProvider>
-        </PlatformProvider>
-      </NextAuthProvider>
       <Toaster />
     </main>
   );

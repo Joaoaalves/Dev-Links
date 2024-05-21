@@ -1,15 +1,17 @@
 import { useProfile } from "@/hooks/useProfile";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
+import ProfileHeader from "./ProfileHeader";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export default function PreviewNavBar() {
   const router = useRouter();
-  const { userId } = useProfile();
+  const { userId, customUrl } = useProfile();
 
   const copyToClipboard = () => {
-    const textToCopy = `${APP_URL}/links/${userId}`;
+    
+    const textToCopy = `${APP_URL}/links/${customUrl ? customUrl : userId}`;
     try {
       navigator.clipboard.writeText(textToCopy).then(showToast);
     } catch {
@@ -55,7 +57,7 @@ export default function PreviewNavBar() {
   };
 
   return (
-    <div className="bg-primary rounded-b-[32px] w-screen h-96 p-6">
+    <ProfileHeader>
       <div className="bg-white w-full px-6 py-3 flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-between rounded-xl gap-2">
         <button
           onClick={() => router.push("/dashboard")}
@@ -70,6 +72,6 @@ export default function PreviewNavBar() {
           Share Link
         </button>
       </div>
-    </div>
+    </ProfileHeader>
   );
 }

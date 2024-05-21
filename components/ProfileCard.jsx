@@ -4,24 +4,27 @@ import Image from "next/image";
 import Link from 'next/link'
 
 export function ProfileCard() {
-  const { error } = useProfile();
+  const { error, isLoading} = useProfile();
 
-  if (error)
+  if (!isLoading && error)
     return (
-      <div className="flex flex-col items-center justify-center rounded-[24px] bg-white shadow-xl p-12 w-96 min-h-72 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <h1 className="text-red text-center font-bold text-4xl">Error 404</h1>
-        <span className="text-borders text-xl">An error ocurred!</span>
-        <p>Check if your link is correct, if it is, contact us.</p>
-      </div>
+        
+        <div className="flex flex-col items-center justify-center rounded-[24px] bg-white shadow-xl p-12 w-96 min-h-72 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <h1 className="text-red text-center font-bold text-4xl">Error 404</h1>
+          <span className="text-borders text-xl">An error ocurred!</span>
+          <p className="text-center">Check if your link is correct, if it is, contact us.</p>
+        </div>
     );
 
   return (
-    <div className="flex flex-col items-center rounded-[24px] bg-white shadow-md p-6 sm:p-12 min-w-[90vw] sm:min-w-80 xl:min-w-96 xl:min-h-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <ProfileImage />
-      <Name />
-      <Email />
-      <Links />
+
+        <div className="flex flex-col items-center rounded-[24px] bg-white shadow-md p-6 sm:p-12 min-w-[90vw] sm:min-w-80 xl:min-w-96 xl:min-h-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <ProfileImage />
+        <Name />
+        <Email />
+        <Links />
     </div>
+
   );
 }
 

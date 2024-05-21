@@ -10,18 +10,18 @@ export default function Home() {
   return (
     <main
       className={`${font.className} w-full h-[100vh] flex items-center justify-center bg-background`}
+      role="main"
     >
-      <NextAuthProvider>
         <div className="flex flex-col items-center justify-center">
           <Image
             width={185}
             height={40}
             src={"/images/logo-devlinks-large.svg"}
             className="mb-12"
+            alt="Logo of DevLinks"
           />
           <Login />
         </div>
-      </NextAuthProvider>
     </main>
   );
 }

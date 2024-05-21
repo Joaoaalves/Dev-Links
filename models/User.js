@@ -20,6 +20,16 @@ const userSchema = mongoose.Schema(
         ref: "Link",
       },
     ],
+    customUrl: {
+      type: String,
+      unique: true
+    },
+    color: {
+      type: String,
+      match: /^#([0-9A-Fa-f]{3}){1,2}$/,
+      required: true,
+      default: '#633CFF'
+    }
   },
   {
     timestamps: true,

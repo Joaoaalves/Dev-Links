@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 async function POST(req, res, session) {
   try {
     await connectDB();
-    var { firstName, lastName, image } = req.body;
+    var { firstName, lastName, image, customUrl, color } = req.body;
 
     if (image) {
       const uploadResult = await cloudinary.uploader.upload(image, {
@@ -37,7 +37,7 @@ async function POST(req, res, session) {
     }
     await User.findOneAndUpdate(
       { email: session.user.email },
-      { firstName, lastName, image },
+      { firstName, lastName, image, customUrl, color },
       { new: true },
     );
     return res.status(200).json({ message: "User updated successfully" });

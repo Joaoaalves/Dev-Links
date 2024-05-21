@@ -17,7 +17,7 @@ export const PlatformProvider = ({ children }) => {
 
   const validateUrl = (platformId, url) => {
     const platform = getPlatform(platformId);
-    const regex = new RegExp(platform.regex);
+    const regex = new RegExp(platform?.regex);
     return regex.test(url);
   };
 

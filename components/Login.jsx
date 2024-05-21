@@ -48,7 +48,7 @@ export default function Login() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-xl max-w-[90vw]">
+    <div className="bg-white p-8 rounded-xl max-w-[90vw]" role="Login">
       <h1 className="self-start font-bold text-[32px]">Login</h1>
       <p className="self-start text-dark-gray">
         Add your details below to get back into the app
@@ -57,6 +57,7 @@ export default function Login() {
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 mt-10 flex flex-col"
+          data-testid="login-component"
         >
           {error && (
             <span className="text-white bg-red/80 p-2 rounded-md self-center">

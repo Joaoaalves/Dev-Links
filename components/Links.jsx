@@ -171,7 +171,7 @@ function UserLink({ link, index }) {
             />
             <h4 className="font-bold text-borders">
               {link?.platform
-                ? getPlatform(link.platform).name
+                ? getPlatform(link.platform)?.name
                 : `UserLink #${index}`}
             </h4>
           </div>
@@ -261,7 +261,7 @@ function LinkSelect({ link }) {
 }
 
 function LinkInput({ link }) {
-  const { handleLinkChange } = useProfile();
+  const { handleLinkChange, isLoading } = useProfile();
   const [validLink, setValidLink] = useState(false);
 
   const { validateUrl } = usePlatforms();
@@ -281,7 +281,7 @@ function LinkInput({ link }) {
       <div
         className="grid grid-cols-[2em_1fr] sm:grid-cols-[2em_1fr_10em] grid-rows-1 items-center place-items-center max-w-[90vw] border-[1px] rounded p-3 gap-x-2 w-full"
         style={{
-          borderColor: validLink ? "" : "red",
+          borderColor: validLink && !isLoading ? "" : "red",
         }}
       >
         <Image
@@ -298,7 +298,7 @@ function LinkInput({ link }) {
           value={link.url}
           className="border-0 w-full ring-0 outline-none"
         />
-        {!validLink && (
+        {!validLink && !isLoading && (
           <span className="hidden sm:block !text-red ms-auto me-3 text-[10px]">
             Invalid UserLink
           </span>

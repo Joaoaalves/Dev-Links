@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { ProfileProvider } from "@/hooks/useProfile";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PlatformProvider } from "@/hooks/usePlatforms";
+import ProfileHeader from "@/components/ProfileHeader";
 
 export default function Page() {
   const router = useRouter();
@@ -13,10 +14,11 @@ export default function Page() {
 
   return (
     <div className="w-screen h-screen bg-background">
-      <div className="bg-primary w-screen h-96 rounded-b-[24px]"></div>
       <PlatformProvider>
         <ProfileProvider userId={userId}>
+          <ProfileHeader>
           <ProfileCard />
+          </ProfileHeader>
         </ProfileProvider>
       </PlatformProvider>
     </div>

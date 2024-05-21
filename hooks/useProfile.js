@@ -3,13 +3,16 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 const ProfileContext = createContext();
 
 export const ProfileProvider = ({ children, userId: propUserId }) => {
-  const [userId, setUserId] = useState(propUserId || "");
+  const [userId, setUserId] = useState("userId",propUserId || "");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [links, setLinks] = useState([]);
   const [image, setImage] = useState("");
+  const [customUrl, setCustomUrl] = useState("");
+  const [color, setColor] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const saveLinks = async () => {
     try {
@@ -21,7 +24,10 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
 
   const getUserInfoFromDB = async () => {
     try {
+      setIsLoading(true)
+      
       const endpoint = userId ? `/api/user?user_id=${userId}` : "/api/profile";
+      
       const res = await fetch(endpoint);
 
       if (!res.ok) {
@@ -43,16 +49,43 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
       setFirstName(user.firstName || "");
       setLastName(user.lastName || "");
       setImage(user.image || "");
-      setError(""); // Clear any previous errors
+      setCustomUrl(user.customUrl || "")
+      setColor(user.color || "")
+      setError("");
+      setIsLoading(false)
     } catch (error) {
-      console.error("Error looking for user profile:", error);
+      setIsLoading(false)
       setError("Failed to fetch user profile. Please check the user ID.");
     }
   };
 
   useEffect(() => {
-    getUserInfoFromDB();
+      getUserInfoFromDB();
   }, [userId]);
+
+  const validateCustomUrl = (customUrl) => {
+    const validPattern = /^[a-zA-Z0-9-_]+$/;
+    
+    if (!validPattern.test(customUrl)) {
+      return false;
+    }
+    
+    try {
+      const url = new URL(customUrl);
+      return false;
+    } catch (e) {
+      return true;
+    }
+  };
+
+  useEffect(() => {
+    if (!validateCustomUrl(customUrl)) {
+      return setError("Custom URL must only contain letters, numbers, hyphens, or underscores.");
+    }
+    
+    setError("");
+  }, [customUrl]);
+  
 
   const addLink = () => {
     setLinks((oldLinks) => [
@@ -99,6 +132,18 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
     return "_" + Math.random().toString(36).substr(2, 9);
   };
 
+  const updateInfo = async (data) => {
+    return await fetch("/api/profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...data
+      }),
+    })
+  }
+
   return (
     <ProfileContext.Provider
       value={{
@@ -117,8 +162,14 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
         setImage,
         swapLinksPosition,
         saveLinks,
+        customUrl,
+        setCustomUrl,
+        color,
+        setColor,
         error,
         setError,
+        isLoading,
+        updateInfo
       }}
     >
       {children}
