@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "pretty": "prettier --check --ignore-path .gitignore .",
-    "pretty:fix": "prettier --write --ignore-path .gitignore .",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "pretty:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.0.0",

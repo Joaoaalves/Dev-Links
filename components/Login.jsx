@@ -81,7 +81,7 @@ export default function Login() {
           >
             <Image src={"/images/icon-password.svg"} width={13} height={10} />
           </Input>
-          <Button>Login</Button>
+          <Button text={"Login"}/>
           <p className="text-dark-gray text-xs text-center xl:text-md">
             Don’t have an account?{" "}
             <Link className="text-primary cursor-pointer" href="/signup">

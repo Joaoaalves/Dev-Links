@@ -1,6 +1,7 @@
 import { useProfile } from "@/hooks/useProfile";
 import Image from "next/image";
 import { toast } from "sonner";
+import { custom } from "zod";
 
 export default function Profile() {
   const { error, isLoading } = useProfile();
@@ -167,7 +168,7 @@ function ProfileInput({
         type={type}
         placeholder={placeholder}
         required={required}
-        className={`p-3 w-3/5 border-2 rounded-lg ${error && !isLoading ? (value.length === 0 ? "border-red" : "") : ""}`}
+        className={`p-3 w-3/5 border-2 rounded-lg ${error && !isLoading ? (required && value.length === 0 ? "border-red" : "") : ""}`}
         value={value}
         onChange={onChange}
         disabled={disabled}
@@ -186,7 +187,7 @@ function ColorInput() {
         type={'color'}
         placeholder={'color'}
         required
-        className={`w-3/5 bg-transparent ${error && !isLoading ? (value.length === 0 ? "border-red" : "") : ""}`}
+        className={`w-3/5 bg-transparent ${error && !isLoading ? (color ? "border-red" : "") : ""}`}
         value={color}
         onChange={e => setColor(e.target.value)}
       />
@@ -199,13 +200,25 @@ function SaveButton() {
   "use client"
   const { email, firstName, lastName, image, customUrl, setError, color, updateInfo } = useProfile();
 
+  const fieldNames = {
+    email: "Email",
+    firstName: "First Name",
+    lastName: "Last Name",
+    image: "Profile Picture",
+    customUrl: "Custom URL",
+  };
+
   const onClick = async () => {
-    if (!email || !firstName || !lastName || !image)
-      return setError("You must provide all the information.");
+    const fields = { email, firstName, lastName, image };
+    const missingFields = Object.keys(fields).filter(key => !fields[key]);
+
+    if (missingFields.length > 0) {
+      const readableMissingFields = missingFields.map(key => fieldNames[key]);
+      return setError(`You must provide the following information: ${readableMissingFields.join(", ")}`);
+    }
     setError("");
 
     await updateInfo({firstName, lastName, email, image, customUrl, color}).then((res) => {
-      
       if (res.error) return alert(res.error);
 
       toast("Your changes have been successfully saved!", {

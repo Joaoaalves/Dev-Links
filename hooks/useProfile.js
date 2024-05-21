@@ -18,7 +18,7 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
     try {
       await User.findOneAndUpdate({ email }, { links }, { new: true });
     } catch (error) {
-      console.error("Erro ao salvar links:", error);
+      console.error("Error saving links:", error);
     }
   };
 

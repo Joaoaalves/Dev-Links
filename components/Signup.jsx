@@ -113,7 +113,7 @@ export default function Signup() {
             Password must contain at least 8 characters
           </p>
 
-          <Button>Create new account</Button>
+          <Button text={"Create new account"}/>
           <p className="text-dark-gray text-xs text-center xl:text-md">
             Already have an account?{" "}
             <Link className="text-primary cursor-pointer" href="/">
