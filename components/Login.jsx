@@ -79,7 +79,7 @@ export default function Login() {
             label={"Password"}
             placeholder={"Enter your password"}
           >
-            <Image src={"/images/icon-password.svg"} width={13} height={10} />
+            <Image src={"/images/icon-password.svg"} width={13} height={10} alt="Password Icon"/>
           </Input>
           <Button text={"Login"}/>
           <p className="text-dark-gray text-xs text-center xl:text-md">

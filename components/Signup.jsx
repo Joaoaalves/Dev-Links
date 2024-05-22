@@ -98,7 +98,7 @@ export default function Signup() {
             label={"Create password"}
             placeholder={"At least 8 characters"}
           >
-            <Image src={"/images/icon-password.svg"} width={13} height={10} />
+            <Image src={"/images/icon-password.svg"} width={13} height={10} alt="Password Icon"/>
           </Input>
           <Input
             type={"password"}
@@ -106,7 +106,7 @@ export default function Signup() {
             label={"Confirm password"}
             placeholder={"At least 8 characters"}
           >
-            <Image src={"/images/icon-password.svg"} width={13} height={10} />
+            <Image src={"/images/icon-password.svg"} width={13} height={10} alt="Password Icon"/>
           </Input>
 
           <p className="text-xs text-dark-gray">
