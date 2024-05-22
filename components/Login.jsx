@@ -84,7 +84,7 @@ export default function Login() {
           <Button text={"Login"}/>
           <p className="text-dark-gray text-xs text-center xl:text-md">
             Don’t have an account?{" "}
-            <Link className="text-primary cursor-pointer" href="/signup">
+            <Link className="text-primary cursor-pointer font-bold" href="/signup">
               Create account
             </Link>
           </p>
