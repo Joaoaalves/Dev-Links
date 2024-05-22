@@ -48,7 +48,7 @@ export default function Login() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-xl max-w-[90vw]" role="Login">
+    <div className="bg-white p-8 rounded-xl max-w-[90vw]">
       <h1 className="self-start font-bold text-[32px]">Login</h1>
       <p className="self-start text-dark-gray">
         Add your details below to get back into the app
@@ -71,7 +71,7 @@ export default function Login() {
             placeholder={"e.g. alex@email.com"}
             control={form.control}
           >
-            <Image src={"/images/icon-email.svg"} width={13} height={10} />
+            <Image src={"/images/icon-email.svg"} width={13} height={10} alt="Email Icon"/>
           </Input>
           <Input
             type={"password"}

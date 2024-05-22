@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
     <NextAuthProvider>
       <PlatformProvider>
         <ProfileProvider>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </ProfileProvider>
       </PlatformProvider>
     </NextAuthProvider>

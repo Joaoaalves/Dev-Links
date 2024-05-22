@@ -90,7 +90,7 @@ export default function Signup() {
             placeholder={"e.g. alex@email.com"}
             control={form.control}
           >
-            <Image src={"/images/icon-email.svg"} width={13} height={10} />
+            <Image src={"/images/icon-email.svg"} width={13} height={10} alt="Email Icon"/>
           </Input>
           <Input
             type={"password"}
@@ -116,7 +116,7 @@ export default function Signup() {
           <Button text={"Create new account"}/>
           <p className="text-dark-gray text-xs text-center xl:text-md">
             Already have an account?{" "}
-            <Link className="text-primary cursor-pointer" href="/">
+            <Link className="text-primary cursor-pointer font-bold" href="/">
               Login
             </Link>
           </p>
