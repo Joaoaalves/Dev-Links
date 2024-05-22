@@ -60,6 +60,7 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
   };
 
   useEffect(() => {
+    if(userId)
       getUserInfoFromDB();
   }, [userId]);
 
