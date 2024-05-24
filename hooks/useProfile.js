@@ -14,13 +14,6 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const saveLinks = async () => {
-    try {
-      await User.findOneAndUpdate({ email }, { links }, { new: true });
-    } catch (error) {
-      console.error("Error saving links:", error);
-    }
-  };
 
   const getUserInfoFromDB = async () => {
     try {
@@ -162,7 +155,6 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
         image,
         setImage,
         swapLinksPosition,
-        saveLinks,
         customUrl,
         setCustomUrl,
         color,
