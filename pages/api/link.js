@@ -1,4 +1,3 @@
-import { connectDB } from "@/lib/connectDB";
 import Link from "@/models/Link";
 import User from "@/models/User";
 import { getServerSession } from "next-auth/next";

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 const ProfileContext = createContext();
 
 export const ProfileProvider = ({ children, userId: propUserId }) => {
-  const [userId, setUserId] = useState("userId",propUserId || "");
+  const [userId, setUserId] = useState(propUserId || "");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,9 +18,9 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
   const getUserInfoFromDB = async () => {
     try {
       setIsLoading(true)
-      
+
       const endpoint = userId ? `/api/user?user_id=${userId}` : "/api/profile";
-      
+
       const res = await fetch(endpoint);
 
       if (!res.ok) {
@@ -53,17 +53,16 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
   };
 
   useEffect(() => {
-    if(userId)
-      getUserInfoFromDB();
+    getUserInfoFromDB();
   }, [userId]);
 
   const validateCustomUrl = (customUrl) => {
     const validPattern = /^[a-zA-Z0-9-_]+$/;
-    
+
     if (!validPattern.test(customUrl)) {
       return false;
     }
-    
+
     try {
       const url = new URL(customUrl);
       return false;
@@ -76,10 +75,10 @@ export const ProfileProvider = ({ children, userId: propUserId }) => {
     if (!validateCustomUrl(customUrl)) {
       return setError("Custom URL must only contain letters, numbers, hyphens, or underscores.");
     }
-    
+
     setError("");
   }, [customUrl]);
-  
+
 
   const addLink = () => {
     setLinks((oldLinks) => [
